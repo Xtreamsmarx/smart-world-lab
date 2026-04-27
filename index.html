@@ -1,0 +1,3154 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart World Lab â€“ University of North Dakota</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.min.js"></script>
+</head>
+<body>
+  <canvas class="constellation-canvas" id="constellationCanvas"></canvas>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">
+        <span class="logo-icon"><i class="fa-solid fa-globe"></i></span>
+        <span class="logo-text">Smart<strong>World</strong> Lab <em>| UND</em></span>
+      </a>
+      <div class="nav-controls">
+        <button class="nav-ctrl-btn" id="navAiBtn" aria-label="Open AI Chat">
+          <i class="fa-solid fa-robot"></i><span>AI Chat</span>
+        </button>
+        <button class="nav-ctrl-btn nav-ctrl-btn--menu" id="navMenuBtn" aria-label="Open Site Menu">
+          <i class="fa-solid fa-bars"></i><span>Menu</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== SMART MENU OVERLAY ===== -->
+  <div class="smart-menu" id="smartMenu" aria-hidden="true">
+    <button class="sm-close" id="smClose" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+    <div class="sm-inner">
+      <div class="sm-header">
+        <div class="sm-logo"><i class="fa-solid fa-globe"></i> Smart World Lab</div>
+        <p class="sm-tagline">University of North Dakota — Navigate all sections</p>
+      </div>
+
+      <div class="sm-grid">
+
+        <!-- Research & Vision -->
+        <div class="sm-group">
+          <div class="sm-group-label"><i class="fa-solid fa-lightbulb"></i> Research &amp; Vision</div>
+          <a href="#about" class="sm-item"><span class="sm-item-icon" style="--sic:#6366f1"><i class="fa-solid fa-flask"></i></span><span class="sm-item-body"><strong>About</strong><span>Lab overview &amp; background</span></span></a>
+          <a href="#mission-vision" class="sm-item"><span class="sm-item-icon" style="--sic:#06b6d4"><i class="fa-solid fa-bullseye"></i></span><span class="sm-item-body"><strong>Mission &amp; Vision</strong><span>Goals &amp; 5-year outlook</span></span></a>
+          <a href="#storyboard" class="sm-item"><span class="sm-item-icon" style="--sic:#8b5cf6"><i class="fa-solid fa-timeline"></i></span><span class="sm-item-body"><strong>Storyboard</strong><span>Our journey, chapter by chapter</span></span></a>
+          <a href="#challenges-solutions" class="sm-item"><span class="sm-item-icon" style="--sic:#ec4899"><i class="fa-solid fa-circle-question"></i></span><span class="sm-item-body"><strong>Challenges &amp; Solutions</strong><span>Animated quick-view right after hero</span></span></a>
+          <a href="#roadmap" class="sm-item"><span class="sm-item-icon" style="--sic:#f59e0b"><i class="fa-solid fa-road"></i></span><span class="sm-item-body"><strong>5-Year Roadmap</strong><span>Quarterly milestones to 2031</span></span></a>
+        </div>
+
+        <!-- Lab Ecosystem -->
+        <div class="sm-group">
+          <div class="sm-group-label"><i class="fa-solid fa-diagram-project"></i> Lab Ecosystem</div>
+          <a href="#projects-hub" class="sm-item"><span class="sm-item-icon" style="--sic:#10b981"><i class="fa-solid fa-layer-group"></i></span><span class="sm-item-body"><strong>Projects Hub</strong><span>8 active research projects</span></span></a>
+          <a href="#lifecycle" class="sm-item"><span class="sm-item-icon" style="--sic:#f59e0b"><i class="fa-solid fa-circle-notch"></i></span><span class="sm-item-body"><strong>CPS Lifecycle</strong><span>Sense → Compute → Deploy orbit</span></span></a>
+          <a href="#ai-iceberg" class="sm-item"><span class="sm-item-icon" style="--sic:#8b5cf6"><i class="fa-solid fa-mountain"></i></span><span class="sm-item-body"><strong>AI Iceberg</strong><span>Inference vs hidden AI stack</span></span></a>
+          <a href="#research" class="sm-item"><span class="sm-item-icon" style="--sic:#6366f1"><i class="fa-solid fa-microscope"></i></span><span class="sm-item-body"><strong>Research Areas</strong><span>8 strategic objectives</span></span></a>
+          <a href="#smart-city-3d" class="sm-item"><span class="sm-item-icon" style="--sic:#06b6d4"><i class="fa-solid fa-city"></i></span><span class="sm-item-body"><strong>3D Smart City</strong><span>Interactive WebGL model</span></span></a>
+                  <a href="lab-tour/" class="sm-item"><span class="sm-item-icon" style="--sic:#10b981"><i class="fa-solid fa-map-location-dot"></i></span><span class="sm-item-body"><strong>Lab Tour</strong><span>Interactive floor plan explorer</span></span></a>
+        </div>
+
+        <!-- Infrastructure -->
+        <div class="sm-group">
+          <div class="sm-group-label"><i class="fa-solid fa-building"></i> Infrastructure</div>
+          <a href="#und-contribution" class="sm-item"><span class="sm-item-icon" style="--sic:#06b6d4"><i class="fa-solid fa-university"></i></span><span class="sm-item-body"><strong>UND Contribution</strong><span>Space, support, and institutional backing</span></span></a>
+          <a href="#infrastructure" class="sm-item"><span class="sm-item-icon" style="--sic:#10b981"><i class="fa-solid fa-server"></i></span><span class="sm-item-body"><strong>Infrastructure</strong><span>Computing &amp; network resources</span></span></a>
+          <a href="#equipment" class="sm-item"><span class="sm-item-icon" style="--sic:#f59e0b"><i class="fa-solid fa-robot"></i></span><span class="sm-item-body"><strong>Equipment</strong><span>Robots, UAVs &amp; fabrication</span></span></a>
+          <a href="#centers" class="sm-item"><span class="sm-item-icon" style="--sic:#8b5cf6"><i class="fa-solid fa-building-columns"></i></span><span class="sm-item-body"><strong>Research Centers</strong><span>AI, CPS, DT &amp; Robotics</span></span></a>
+        </div>
+
+        <!-- Community -->
+        <div class="sm-group">
+          <div class="sm-group-label"><i class="fa-solid fa-users"></i> Community</div>
+          <a href="#gallery" class="sm-item"><span class="sm-item-icon" style="--sic:#06b6d4"><i class="fa-solid fa-images"></i></span><span class="sm-item-body"><strong>Gallery</strong><span>Photos &amp; media</span></span></a>
+          <a href="#tree-chat" class="sm-item"><span class="sm-item-icon" style="--sic:#10b981"><i class="fa-solid fa-comments"></i></span><span class="sm-item-body"><strong>Tree Chat</strong><span>Community discussion</span></span></a>
+          <a href="#team" class="sm-item"><span class="sm-item-icon" style="--sic:#6366f1"><i class="fa-solid fa-user-group"></i></span><span class="sm-item-body"><strong>Team</strong><span>Faculty &amp; researchers</span></span></a>
+          <a href="#contact" class="sm-item"><span class="sm-item-icon" style="--sic:#f59e0b"><i class="fa-solid fa-envelope"></i></span><span class="sm-item-body"><strong>Contact</strong><span>Get in touch with us</span></span></a>
+        </div>
+
+      </div><!-- /sm-grid -->
+
+      <div class="sm-footer">
+        <a href="https://xtreamsmarx.github.io/SmartWorld/home/home.html" target="_blank" rel="noopener" class="sm-os-btn">
+          <i class="fa-solid fa-globe"></i> Launch Smart World OS <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+  </div><!-- /smart-menu -->
+
+  <!-- ===== AI CHAT PANEL ===== -->
+  <div class="ai-chat-panel" id="aiChatPanel" aria-hidden="true">
+    <div class="acp-header">
+      <div class="acp-title">
+        <span class="acp-avatar-icon"><i class="fa-solid fa-robot"></i></span>
+        <div><strong>Smart World AI</strong><span>Ask me about the lab</span></div>
+      </div>
+      <button class="acp-close" id="acpClose" aria-label="Close chat"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="acp-messages" id="acpMessages">
+      <div class="acp-msg acp-msg--ai">
+        <span class="acp-bubble">Hi! I'm the Smart World Lab AI assistant. Ask me anything about the lab — research, projects, equipment, funding, or how to get involved! 🚀</span>
+      </div>
+      <div class="acp-chips" id="acpChips">
+        <button class="acp-chip">What is Smart World Lab?</button>
+        <button class="acp-chip">What research is happening?</button>
+        <button class="acp-chip">What's the funding goal?</button>
+        <button class="acp-chip">How to get involved?</button>
+        <button class="acp-chip">Tell me about the CPS lifecycle</button>
+        <button class="acp-chip">What equipment do you have?</button>
+      </div>
+    </div>
+    <div class="acp-input-wrap">
+      <input type="text" class="acp-input" id="acpInput" placeholder="Ask about the lab…" autocomplete="off" maxlength="200" />
+      <button class="acp-send" id="acpSend" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <div class="ai-chat-backdrop" id="aiChatBackdrop"></div>
+
+
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="grid-overlay"></div>
+    </div>
+
+    <div class="hero-inner">
+
+      <!-- LEFT: text content -->
+      <div class="hero-content hero-left">
+        <div class="hero-university">
+          <i class="fa-solid fa-university"></i> University of North Dakota
+        </div>
+        <h1>Smart World Lab</h1>
+        <p class="hero-tagline gradient-text">Cyber-Physical Systems &middot; AI Engineering &middot; Digital Twin &middot; Smart Infrastructure</p>
+        <p class="hero-sub">
+          A comprehensive, interdisciplinary laboratory designed to support research, education, and innovation
+          in CPS, AI Engineering, Digital Twin Technologies, Smart Cities, Robotics, UAV Systems, and Digital Fabrication.
+        </p>
+        <div class="hero-actions">
+          <a href="#about" class="btn btn-primary">Learn More</a>
+          <a href="#equipment" class="btn btn-outline">View Equipment</a>
+          <button type="button" class="btn btn-os" id="goToOsBtn">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Go to Smart World OS
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num" data-target="5">0</span>+<p>NSF Proposals</p></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num" data-target="300">0</span>K<p>Budget (USD)</p></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num" data-target="30">0</span>+<p>Students Served</p></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num" data-target="5">0</span><p>Departments</p></div>
+        </div>
+
+        <!-- $10M+ funding goal banner -->
+        <div class="funding-goal-banner">
+          <div class="fgb-pulse"></div>
+          <div class="fgb-icon"><i class="fa-solid fa-circle-dollar-to-slot"></i></div>
+          <div class="fgb-body">
+            <div class="fgb-label">Funding Goal &mdash; In Progress</div>
+            <div class="fgb-amount">$10M<span>+</span></div>
+            <div class="fgb-sub">Targeting $10M+ in cumulative funding across NSF, DoD, DoE &amp; federal contracts over 5 years</div>
+          </div>
+          <div class="fgb-track-wrap">
+            <div class="fgb-track-label"><span>Progress</span><span class="fgb-pct">~3%</span></div>
+            <div class="fgb-track"><div class="fgb-fill" data-pct="3"></div></div>
+            <div class="fgb-milestones">
+              <span>$0</span><span>$2.5M</span><span>$5M</span><span>$7.5M</span><span>$10M+</span>
+            </div>
+          </div>
+        </div>
+      </div><!-- /hero-left -->
+
+      <!-- RIGHT: rotating CPS lifecycle orbit -->
+      <div class="hero-right">
+        <div class="hero-orbit-wrap">
+
+          <!-- static ring SVG -->
+          <svg class="hero-orbit-svg" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="hRingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#6366f1"/>
+                <stop offset="33%"  stop-color="#06b6d4"/>
+                <stop offset="66%"  stop-color="#10b981"/>
+                <stop offset="100%" stop-color="#8b5cf6"/>
+              </linearGradient>
+              <filter id="hGlow">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <!-- outer guide ring -->
+            <circle cx="210" cy="210" r="168" fill="none" stroke="rgba(99,102,241,0.1)" stroke-width="1" stroke-dasharray="6 6"/>
+            <!-- main animated ring -->
+            <circle cx="210" cy="210" r="168" fill="none" stroke="url(#hRingGrad)" stroke-width="1.8"
+                    filter="url(#hGlow)" class="hero-ring-anim"/>
+          </svg>
+
+          <!-- center OS button (static, doesn't rotate) -->
+          <a href="https://xtreamsmarx.github.io/SmartWorld/home/home.html" target="_blank" rel="noopener" class="hero-orbit-center" title="Launch Smart World OS">
+            <span class="hoc-ring hoc-ring--1"></span>
+            <span class="hoc-ring hoc-ring--2"></span>
+            <span class="hoc-ring hoc-ring--3"></span>
+            <span class="hoc-inner">
+              <i class="fa-solid fa-globe"></i>
+              <span class="hoc-title">Smart World</span>
+              <span class="hoc-sub">OS Platform</span>
+              <span class="hoc-launch">Launch ↗</span>
+            </span>
+          </a>
+
+          <!-- spinning ring of nodes -->
+          <div class="hero-orbit-ring" id="heroOrbitRing">
+
+            <!-- 01 SENSE — top (0°) -->
+            <div class="hon" style="--a:0deg;--nc:#06b6d4">
+              <span class="hon-inner">
+                <span class="hon-icon"><i class="fa-solid fa-satellite-dish"></i></span>
+                <span class="hon-num">01</span>
+                <span class="hon-lbl">SENSE</span>
+              </span>
+            </div>
+
+            <!-- 02 COMPUTE — top-right (60°) -->
+            <div class="hon" style="--a:60deg;--nc:#6366f1">
+              <span class="hon-inner">
+                <span class="hon-icon"><i class="fa-solid fa-microchip"></i></span>
+                <span class="hon-num">02</span>
+                <span class="hon-lbl">COMPUTE</span>
+              </span>
+            </div>
+
+            <!-- 03 SIMULATE — bottom-right (120°) -->
+            <div class="hon" style="--a:120deg;--nc:#10b981">
+              <span class="hon-inner">
+                <span class="hon-icon"><i class="fa-solid fa-cube"></i></span>
+                <span class="hon-num">03</span>
+                <span class="hon-lbl">SIMULATE</span>
+              </span>
+            </div>
+
+            <!-- 04 FABRICATE — bottom (180°) -->
+            <div class="hon" style="--a:180deg;--nc:#f59e0b">
+              <span class="hon-inner">
+                <span class="hon-icon"><i class="fa-solid fa-print"></i></span>
+                <span class="hon-num">04</span>
+                <span class="hon-lbl">FABRICATE</span>
+              </span>
+            </div>
+
+            <!-- 05 DEPLOY — bottom-left (240°) -->
+            <div class="hon" style="--a:240deg;--nc:#ec4899">
+              <span class="hon-inner">
+                <span class="hon-icon"><i class="fa-solid fa-robot"></i></span>
+                <span class="hon-num">05</span>
+                <span class="hon-lbl">DEPLOY</span>
+              </span>
+            </div>
+
+            <!-- 06 MONITOR — top-left (300°) -->
+            <div class="hon" style="--a:300deg;--nc:#8b5cf6">
+              <span class="hon-inner">
+                <span class="hon-icon"><i class="fa-solid fa-chart-line"></i></span>
+                <span class="hon-num">06</span>
+                <span class="hon-lbl">MONITOR</span>
+              </span>
+            </div>
+
+          </div><!-- /hero-orbit-ring -->
+        </div><!-- /hero-orbit-wrap -->
+      </div><!-- /hero-right -->
+
+    </div><!-- /hero-inner -->
+
+    <a href="#about" class="scroll-down" aria-label="Scroll down">
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+  </section>
+
+  <!-- ===== CHALLENGES & SOLUTIONS (HOMEPAGE HIGHLIGHT) ===== -->
+  <section class="section cs-highlight" id="challenges-solutions">
+    <canvas class="cs-matrix-canvas" id="csMatrixCanvas" aria-hidden="true"></canvas>
+    <div class="container">
+      <div class="section-tag">Challenges &amp; Solutions</div>
+      <h2 class="section-title grad">From Pain Points to Practical Impact</h2>
+      <p class="section-sub">Smart World Lab turns complex institutional challenges into deployable solutions through coordinated AI, CPS, digital twin, and robotics workflows.</p>
+
+      <div class="cs-radar reveal" aria-hidden="true">
+        <span class="cs-ring cs-ring--1"></span>
+        <span class="cs-ring cs-ring--2"></span>
+        <span class="cs-ring cs-ring--3"></span>
+        <span class="cs-blip" style="--bx:18%;--by:56%;--bd:0s"></span>
+        <span class="cs-blip" style="--bx:34%;--by:24%;--bd:0.6s"></span>
+        <span class="cs-blip" style="--bx:68%;--by:36%;--bd:1.2s"></span>
+        <span class="cs-blip" style="--bx:82%;--by:70%;--bd:1.8s"></span>
+      </div>
+
+      <div class="cs-grid">
+        <article class="cs-col cs-col--challenge reveal">
+          <h3><i class="fa-solid fa-triangle-exclamation"></i> Key Challenges</h3>
+          <div class="cs-list">
+            <div class="cs-item cs-item--active" data-cs-step="1" style="--csclr:#6366f1">
+              <span class="cs-dot"></span>
+              <div><strong>Fragmented Labs</strong><p>Tools and expertise spread across departments with limited integration.</p></div>
+            </div>
+            <div class="cs-item" data-cs-step="2" style="--csclr:#06b6d4">
+              <span class="cs-dot"></span>
+              <div><strong>Slow Translation</strong><p>AI research outcomes often do not reach practical classroom and operations workflows.</p></div>
+            </div>
+            <div class="cs-item" data-cs-step="3" style="--csclr:#8b5cf6">
+              <span class="cs-dot"></span>
+              <div><strong>Workforce Gap</strong><p>Students need more real system-level experience in modern CPS and AI pipelines.</p></div>
+            </div>
+            <div class="cs-item" data-cs-step="4" style="--csclr:#f43f5e">
+              <span class="cs-dot"></span>
+              <div><strong>Data Silos</strong><p>Critical data lives in disconnected systems, limiting model quality and institutional visibility.</p></div>
+            </div>
+            <div class="cs-item" data-cs-step="5" style="--csclr:#22d3ee">
+              <span class="cs-dot"></span>
+              <div><strong>Compliance Pressure</strong><p>Rapid AI adoption increases risk around governance, safety, and responsible usage.</p></div>
+            </div>
+          </div>
+        </article>
+
+        <div class="cs-bridge reveal" aria-hidden="true">
+          <span class="cs-flow"></span>
+          <span class="cs-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+
+        <article class="cs-col cs-col--solution reveal">
+          <h3><i class="fa-solid fa-bolt"></i> Smart World Solutions</h3>
+          <div class="cs-list">
+            <div class="cs-item cs-item--active" data-cs-step="1" style="--csclr:#10b981">
+              <span class="cs-dot"></span>
+              <div><strong>Unified Platform</strong><p>One operating framework linking sensing, compute, simulation, and deployment.</p></div>
+            </div>
+            <div class="cs-item" data-cs-step="2" style="--csclr:#f59e0b">
+              <span class="cs-dot"></span>
+              <div><strong>Rapid Validation</strong><p>Digital twin and XR loops reduce risk and shorten time from concept to field use.</p></div>
+            </div>
+            <div class="cs-item" data-cs-step="3" style="--csclr:#ec4899">
+              <span class="cs-dot"></span>
+              <div><strong>Talent Pipeline</strong><p>Hands-on projects prepare students and faculty teams for high-impact funded work.</p></div>
+            </div>
+            <div class="cs-item" data-cs-step="4" style="--csclr:#14b8a6">
+              <span class="cs-dot"></span>
+              <div><strong>Shared Data Backbone</strong><p>Cross-center data architecture supports consistent analytics and model lifecycle management.</p></div>
+            </div>
+            <div class="cs-item" data-cs-step="5" style="--csclr:#a78bfa">
+              <span class="cs-dot"></span>
+              <div><strong>AI Governance Loop</strong><p>Validation, monitoring, and policy controls make deployment safe, scalable, and trusted.</p></div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="cs-story reveal">
+        <h3><i class="fa-solid fa-route"></i> Transition Story: Problem to Impact</h3>
+        <div class="cs-story-track" aria-hidden="true"><span></span></div>
+        <div class="cs-story-steps">
+          <article class="cs-story-step cs-story-step--active" data-cs-step="1" style="--sclr:#6366f1">
+            <div class="cs-story-num">01</div>
+            <h4>Identify</h4>
+            <p>Map bottlenecks across teaching, research, and operations.</p>
+          </article>
+          <article class="cs-story-step" data-cs-step="2" style="--sclr:#06b6d4">
+            <div class="cs-story-num">02</div>
+            <h4>Integrate</h4>
+            <p>Unify tools, infrastructure, and data into one coordinated environment.</p>
+          </article>
+          <article class="cs-story-step" data-cs-step="3" style="--sclr:#10b981">
+            <div class="cs-story-num">03</div>
+            <h4>Validate</h4>
+            <p>Use AI gateway checks for safety, compliance, and performance.</p>
+          </article>
+          <article class="cs-story-step" data-cs-step="4" style="--sclr:#f59e0b">
+            <div class="cs-story-num">04</div>
+            <h4>Deploy</h4>
+            <p>Move verified models into classrooms, labs, and partner projects.</p>
+          </article>
+          <article class="cs-story-step" data-cs-step="5" style="--sclr:#ec4899">
+            <div class="cs-story-num">05</div>
+            <h4>Scale Impact</h4>
+            <p>Grow funding, workforce readiness, and regional innovation outcomes.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="cs-cta reveal">
+        <a href="#why-what-how" class="btn btn-primary"><i class="fa-solid fa-layer-group"></i> Explore Full Why · What · How</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== BRAND TICKER ===== -->
+  <div class="brand-ticker" aria-label="Partner and sponsor organizations">
+    <div class="brand-ticker__label">Partners &amp; Sponsors</div>
+    <div class="brand-ticker__track-wrap">
+      <div class="brand-ticker__track">
+        <!-- set 1 -->
+        <div class="brand-logo" title="University of North Dakota">
+          <span class="bl-abbr">UND</span>
+          <span class="bl-name">University of<br>North Dakota</span>
+        </div>
+        <div class="brand-logo" title="Department of Defense">
+          <span class="bl-abbr">DoD</span>
+          <span class="bl-name">Department<br>of Defense</span>
+        </div>
+        <div class="brand-logo" title="National Science Foundation">
+          <span class="bl-abbr">NSF</span>
+          <span class="bl-name">National Science<br>Foundation</span>
+        </div>
+        <div class="brand-logo" title="NASA">
+          <span class="bl-abbr">NASA</span>
+          <span class="bl-name">National Aeronautics &amp;<br>Space Administration</span>
+        </div>
+        <div class="brand-logo" title="Department of Energy">
+          <span class="bl-abbr">DoE</span>
+          <span class="bl-name">Department<br>of Energy</span>
+        </div>
+        <div class="brand-logo" title="Department of Transportation">
+          <span class="bl-abbr">DoT</span>
+          <span class="bl-name">Department of<br>Transportation</span>
+        </div>
+        <div class="brand-logo" title="DARPA">
+          <span class="bl-abbr">DARPA</span>
+          <span class="bl-name">Defense Advanced Research<br>Projects Agency</span>
+        </div>
+        <div class="brand-logo" title="National Institutes of Health">
+          <span class="bl-abbr">NIH</span>
+          <span class="bl-name">National Institutes<br>of Health</span>
+        </div>
+        <div class="brand-logo" title="North Dakota Department of Commerce">
+          <span class="bl-abbr">NDDC</span>
+          <span class="bl-name">ND Dept. of<br>Commerce</span>
+        </div>
+        <div class="brand-logo" title="Air Force Research Laboratory">
+          <span class="bl-abbr">AFRL</span>
+          <span class="bl-name">Air Force Research<br>Laboratory</span>
+        </div>
+        <!-- set 2 — duplicate for seamless loop -->
+        <div class="brand-logo" title="University of North Dakota">
+          <span class="bl-abbr">UND</span>
+          <span class="bl-name">University of<br>North Dakota</span>
+        </div>
+        <div class="brand-logo" title="Department of Defense">
+          <span class="bl-abbr">DoD</span>
+          <span class="bl-name">Department<br>of Defense</span>
+        </div>
+        <div class="brand-logo" title="National Science Foundation">
+          <span class="bl-abbr">NSF</span>
+          <span class="bl-name">National Science<br>Foundation</span>
+        </div>
+        <div class="brand-logo" title="NASA">
+          <span class="bl-abbr">NASA</span>
+          <span class="bl-name">National Aeronautics &amp;<br>Space Administration</span>
+        </div>
+        <div class="brand-logo" title="Department of Energy">
+          <span class="bl-abbr">DoE</span>
+          <span class="bl-name">Department<br>of Energy</span>
+        </div>
+        <div class="brand-logo" title="Department of Transportation">
+          <span class="bl-abbr">DoT</span>
+          <span class="bl-name">Department of<br>Transportation</span>
+        </div>
+        <div class="brand-logo" title="DARPA">
+          <span class="bl-abbr">DARPA</span>
+          <span class="bl-name">Defense Advanced Research<br>Projects Agency</span>
+        </div>
+        <div class="brand-logo" title="National Institutes of Health">
+          <span class="bl-abbr">NIH</span>
+          <span class="bl-name">National Institutes<br>of Health</span>
+        </div>
+        <div class="brand-logo" title="North Dakota Department of Commerce">
+          <span class="bl-abbr">NDDC</span>
+          <span class="bl-name">ND Dept. of<br>Commerce</span>
+        </div>
+        <div class="brand-logo" title="Air Force Research Laboratory">
+          <span class="bl-abbr">AFRL</span>
+          <span class="bl-name">Air Force Research<br>Laboratory</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section-tag">Who We Are</div>
+      <h2 class="section-title grad">About Smart World Lab</h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p class="lead">
+            The University of North Dakota's Smart World Lab is a comprehensive, interdisciplinary research
+            and education infrastructure designed to unify sensing, computation, simulation, fabrication, and
+            deployment within a single operational framework.
+          </p>
+          <p>
+            The lab addresses a critical and time-sensitive need at UND. Faculty across Civil Engineering,
+            Mechanical Engineering, Electrical Engineering, Computer Science, and Aerospace Engineering are
+            actively engaged in research requiring AI-driven modeling, digital twin simulation, real-time sensing,
+            and physical system deployment &mdash; evidenced by five NSF proposals currently in development, with
+            two already submitted.
+          </p>
+          <p>
+            A distinguishing feature is the development of an <strong>AI-driven operating and resource management
+            system</strong> developed at UND, orchestrating all lab components within a unified environment, enabling
+            secure multi-user access and 24/7 operation.
+          </p>
+          <div class="about-highlights">
+            <div class="highlight-item">
+              <i class="fa-solid fa-microchip"></i>
+              <div>
+                <strong>Research-Grade Infrastructure</strong>
+                <span>H100/A100 supercomputing, advanced sensing, robotics</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <i class="fa-solid fa-users"></i>
+              <div>
+                <strong>Multidisciplinary Collaboration</strong>
+                <span>5 departments, shared university-wide platform</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <div>
+                <strong>STEM Education &amp; Workforce</strong>
+                <span>20&ndash;30 students simultaneously, next-gen courses</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about-visual reveal">
+          <div class="visual-card vc1"><i class="fa-solid fa-brain"></i><span>AI Engineering</span></div>
+          <div class="visual-card vc2"><i class="fa-solid fa-network-wired"></i><span>CPS</span></div>
+          <div class="visual-card vc3"><i class="fa-solid fa-city"></i><span>Digital Twin</span></div>
+          <div class="visual-card vc4"><i class="fa-solid fa-helicopter"></i><span>UAV Systems</span></div>
+          <div class="visual-center"><i class="fa-solid fa-globe"></i><span>Smart World</span></div>
+        </div>
+      </div>
+
+      <div class="summary-box reveal">
+        <div class="summary-icon"><i class="fa-solid fa-file-lines"></i></div>
+        <div class="summary-content">
+          <h3>Executive Summary</h3>
+          <p>
+            The University of North Dakota (UND) proposes the establishment of the Smart World Lab &mdash; a strategic
+            institutional investment with a total requested budget of approximately <strong>$300,000</strong>, structured
+            with prioritized implementation tiers. The lab will establish UND as a competitive and forward-looking
+            institution in AI engineering and cyber-physical systems, delivering long-term benefits in research,
+            education, and workforce development. It will directly support the execution of current NSF proposals and
+            significantly expand UND's capacity to develop and submit future proposals to NSF, DoD, and DoE.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MISSION & VISION ===== -->
+  <section class="section mission-vision" id="mission-vision">
+    <div class="container">
+      <div class="section-tag">Guiding Direction</div>
+      <h2 class="section-title grad">Mission &amp; Vision</h2>
+      <p class="section-sub">Our mission and vision define how Smart World Lab translates advanced research into measurable impact for UND, North Dakota, and beyond.</p>
+
+      <div class="mv-grid">
+        <!-- â”€â”€ Mission â”€â”€ -->
+        <article class="mv-card mv-enhanced reveal" style="--clr:#6366f1">
+          <div class="mv-shimmer"></div>
+          <div class="mv-icon mv-pulse"><i class="fa-solid fa-bullseye"></i></div>
+          <h3>Our Mission</h3>
+          <p>To build an integrated, multidisciplinary platform that accelerates AI engineering, cyber-physical systems, and digital twin innovation through shared infrastructure, applied research, and hands-on learning.</p>
+          <ul class="mv-bullets">
+            <li><span class="mv-dot"></span>Deliver research-grade facilities across AI, sensing, robotics, and simulation</li>
+            <li><span class="mv-dot"></span>Enable cross-department collaboration and proposal competitiveness</li>
+            <li><span class="mv-dot"></span>Train students with practical, real-world CPS and AI workflows</li>
+          </ul>
+          <div class="mv-counters">
+            <div class="mv-count-item">
+              <div><span class="stat-num" data-target="4">0</span></div>
+              <div class="mv-count-label">Research Centers</div>
+            </div>
+            <div class="mv-count-item">
+              <div><span class="stat-num" data-target="50">0</span><span class="mv-count-plus">+</span></div>
+              <div class="mv-count-label">Researchers</div>
+            </div>
+            <div class="mv-count-item">
+              <div><span class="stat-num" data-target="12">0</span></div>
+              <div class="mv-count-label">Active Projects</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- â”€â”€ Vision â”€â”€ -->
+        <article class="mv-card mv-enhanced reveal" style="--clr:#06b6d4">
+          <div class="mv-shimmer"></div>
+          <div class="mv-icon mv-pulse"><i class="fa-solid fa-binoculars"></i></div>
+          <h3>Our Vision</h3>
+          <p>To position UND as a national model for AI-driven smart systems by connecting cutting-edge research, responsible technology adoption, and workforce-ready education in one living innovation ecosystem.</p>
+          <ul class="mv-bullets">
+            <li><span class="mv-dot"></span>Become a leading regional hub for smart infrastructure and intelligent autonomy</li>
+            <li><span class="mv-dot"></span>Bridge advanced AI capabilities with everyday academic and societal needs</li>
+            <li><span class="mv-dot"></span>Drive long-term impact through industry, government, and community partnerships</li>
+          </ul>
+          <div class="mv-bars">
+            <div class="mv-bar-row">
+              <div class="mv-bar-label"><span>Research Output</span><span class="mv-bar-pct">78%</span></div>
+              <div class="mv-bar-track"><div class="mv-bar-fill" data-pct="78"></div></div>
+            </div>
+            <div class="mv-bar-row">
+              <div class="mv-bar-label"><span>Industry Partnerships</span><span class="mv-bar-pct">62%</span></div>
+              <div class="mv-bar-track"><div class="mv-bar-fill" data-pct="62"></div></div>
+            </div>
+            <div class="mv-bar-row">
+              <div class="mv-bar-label"><span>Student Engagement</span><span class="mv-bar-pct">91%</span></div>
+              <div class="mv-bar-track"><div class="mv-bar-fill" data-pct="91"></div></div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5-YEAR STRATEGIC ROADMAP ===== -->
+  <section class="section roadmap" id="roadmap">
+    <div class="container">
+      <div class="section-tag">Strategic Planning</div>
+      <h2 class="section-title grad">5-Year Strategic Roadmap</h2>
+      <p class="section-sub">A detailed quarterly plan from April 2026 to March 2031 â€” guiding Smart World Lab from first launch to national leadership.</p>
+
+      <div class="rm-overall reveal">
+        <div class="rm-overall-label"><span>Overall 5-Year Journey</span><span class="rm-overall-pct">Year 1 of 5 â€” In Progress</span></div>
+        <div class="rm-overall-track">
+          <div class="rm-overall-fill" data-pct="5"></div>
+          <div class="rm-year-markers">
+            <span>Y1</span><span>Y2</span><span>Y3</span><span>Y4</span><span>Y5</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rm-tabs">
+        <button class="rm-tab rm-tab--active" data-year="1" style="--clr:#6366f1">
+          <span class="rm-tab-yr">Year 1</span>
+          <span class="rm-tab-range">Apr 2026 â€“ Mar 2027</span>
+          <span class="rm-tab-theme">Foundation &amp; Launch</span>
+        </button>
+        <button class="rm-tab" data-year="2" style="--clr:#06b6d4">
+          <span class="rm-tab-yr">Year 2</span>
+          <span class="rm-tab-range">Apr 2027 â€“ Mar 2028</span>
+          <span class="rm-tab-theme">Growth &amp; Grants</span>
+        </button>
+        <button class="rm-tab" data-year="3" style="--clr:#10b981">
+          <span class="rm-tab-yr">Year 3</span>
+          <span class="rm-tab-range">Apr 2028 â€“ Mar 2029</span>
+          <span class="rm-tab-theme">Expansion &amp; Recognition</span>
+        </button>
+        <button class="rm-tab" data-year="4" style="--clr:#f59e0b">
+          <span class="rm-tab-yr">Year 4</span>
+          <span class="rm-tab-range">Apr 2029 â€“ Mar 2030</span>
+          <span class="rm-tab-theme">Leadership &amp; Impact</span>
+        </button>
+        <button class="rm-tab" data-year="5" style="--clr:#ec4899">
+          <span class="rm-tab-yr">Year 5</span>
+          <span class="rm-tab-range">Apr 2030 â€“ Mar 2031</span>
+          <span class="rm-tab-theme">National Model &amp; Legacy</span>
+        </button>
+      </div>
+
+      <!-- â”€â”€ Year 1 â”€â”€ -->
+      <div class="rm-panel" data-panel="1">
+        <div class="rm-quarters">
+          <div class="rm-quarter reveal" style="--qclr:#6366f1">
+            <div class="rm-q-header"><span class="rm-q-badge">Q2 2026</span><span class="rm-q-dates">Apr â€“ Jun 2026</span></div>
+            <h4>Infrastructure &amp; Setup</h4>
+            <ul class="rm-milestones">
+              <li>Lab space renovation and equipment installation</li>
+              <li>Deploy AI Center GPU cluster (H100 / A100)</li>
+              <li>Launch Smart World Lab website and brand</li>
+              <li>Onboard founding team: 5 faculty, 10 students</li>
+            </ul>
+            <div class="rm-q-status rm-q-status--active">Active Now</div>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#6366f1">
+            <div class="rm-q-header"><span class="rm-q-badge">Q3 2026</span><span class="rm-q-dates">Jul â€“ Sep 2026</span></div>
+            <h4>First Research Cohort</h4>
+            <ul class="rm-milestones">
+              <li>Launch 3 pilot research projects (AI, CPS, DT)</li>
+              <li>Establish CPS Center operational baseline</li>
+              <li>Submit first NSF seed funding proposal</li>
+              <li>Student training bootcamp for lab tools</li>
+            </ul>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#6366f1">
+            <div class="rm-q-header"><span class="rm-q-badge">Q4 2026</span><span class="rm-q-dates">Oct â€“ Dec 2026</span></div>
+            <h4>Partnerships &amp; Outreach</h4>
+            <ul class="rm-milestones">
+              <li>Sign first 2 industry MoUs</li>
+              <li>Launch Robotics Center initial activity</li>
+              <li>Host first public open-house and demo day</li>
+              <li>Submit 2 journal papers for review</li>
+            </ul>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#6366f1">
+            <div class="rm-q-header"><span class="rm-q-badge">Q1 2027</span><span class="rm-q-dates">Jan â€“ Mar 2027</span></div>
+            <h4>First Research Output</h4>
+            <ul class="rm-milestones">
+              <li>3 peer-reviewed publications submitted/accepted</li>
+              <li>Digital Twin proof-of-concept demo</li>
+              <li>4 active grant proposals in pipeline</li>
+              <li>Student cohort grows to 25 active researchers</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- â”€â”€ Year 2 â”€â”€ -->
+      <div class="rm-panel rm-panel--hidden" data-panel="2">
+        <div class="rm-quarters">
+          <div class="rm-quarter reveal" style="--qclr:#06b6d4">
+            <div class="rm-q-header"><span class="rm-q-badge">Q2 2027</span><span class="rm-q-dates">Apr â€“ Jun 2027</span></div>
+            <h4>Funding Milestone</h4>
+            <ul class="rm-milestones">
+              <li>Secure first major grant (NSF/DoD, $500K+)</li>
+              <li>Robotics Center fully operational</li>
+              <li>Industry capstone projects begin</li>
+              <li>5+ publications in active pipeline</li>
+            </ul>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#06b6d4">
+            <div class="rm-q-header"><span class="rm-q-badge">Q3 2027</span><span class="rm-q-dates">Jul â€“ Sep 2027</span></div>
+            <h4>Scaling Operations</h4>
+            <ul class="rm-milestones">
+              <li>Upgrade HPC cluster capacity by 2Ã—</li>
+              <li>Cross-department project (3 departments)</li>
+              <li>AR/VR immersive lab expansion complete</li>
+              <li>Annual Research Symposium #1 hosted</li>
+            </ul>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#06b6d4">
+            <div class="rm-q-header"><span class="rm-q-badge">Q4 2027</span><span class="rm-q-dates">Oct â€“ Dec 2027</span></div>
+            <h4>Technology Transfer</h4>
+            <ul class="rm-milestones">
+              <li>Release open-source AI/CPS software toolkit</li>
+              <li>File first patent application</li>
+              <li>Submit federal contract proposals</li>
+              <li>Student cohort grows to 35+ researchers</li>
+            </ul>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#06b6d4">
+            <div class="rm-q-header"><span class="rm-q-badge">Q1 2028</span><span class="rm-q-dates">Jan â€“ Mar 2028</span></div>
+            <h4>Mid-Term Review</h4>
+            <ul class="rm-milestones">
+              <li>10+ peer-reviewed publications total</li>
+              <li>3 grants secured (cumulative $750K+)</li>
+              <li>External advisory board established</li>
+              <li>First industry licensing agreement signed</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- â”€â”€ Year 3 â”€â”€ -->
+      <div class="rm-panel rm-panel--hidden" data-panel="3">
+        <div class="rm-quarters">
+          <div class="rm-quarter reveal" style="--qclr:#10b981">
+            <div class="rm-q-header"><span class="rm-q-badge">Q2 2028</span><span class="rm-q-dates">Apr â€“ Jun 2028</span></div>
+            <h4>National Visibility</h4>
+            <ul class="rm-milestones">
+              <li>Digital Twin partnership with national research lab</li>
+              <li>Invited talks at 3 national conferences</li>
+              <li>Community STEM outreach program launched</li>
+              <li>Second open-source toolkit release</li>
+            </ul>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#10b981">
+            <div class="rm-q-header"><span class="rm-q-badge">Q3 2028</span><span class="rm-q-dates">Jul â€“ Sep 2028</span></div>
+            <h4>Smart Systems Summit</h4>
+            <ul class="rm-milestones">
+              <li>Host "Smart Systems Summit" at UND (200+ attendees)</li>
+              <li>20+ institutions represented</li>
+              <li>Government agency collaboration MoU signed</li>
+              <li>15+ student researchers mentored this year</li>
+            </ul>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#10b981">
+            <div class="rm-q-header"><span class="rm-q-badge">Q4 2028</span><span class="rm-q-dates">Oct â€“ Dec 2028</span></div>
+            <h4>Federal Contract Secured</h4>
+            <ul class="rm-milestones">
+              <li>Federal contract awarded ($1M+ milestone)</li>
+              <li>5 UND courses integrated with lab infrastructure</li>
+              <li>International collaboration initiated (EU partner)</li>
+              <li>Phase 4 autonomous systems agenda drafted</li>
+            </ul>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#10b981">
+            <div class="rm-q-header"><span class="rm-q-badge">Q1 2029</span><span class="rm-q-dates">Jan â€“ Mar 2029</span></div>
+            <h4>Autonomy Focus</h4>
+            <ul class="rm-milestones">
+              <li>Autonomous systems research program launched</li>
+              <li>20+ total publications milestone reached</li>
+              <li>2 patent applications filed (cumulative)</li>
+              <li>Industry spin-off exploration begins</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- â”€â”€ Year 4 â”€â”€ -->
+      <div class="rm-panel rm-panel--hidden" data-panel="4">
+        <div class="rm-quarters">
+          <div class="rm-quarter reveal" style="--qclr:#f59e0b">
+            <div class="rm-q-header"><span class="rm-q-badge">Q2 2029</span><span class="rm-q-dates">Apr â€“ Jun 2029</span></div>
+            <h4>Major Grant Award</h4>
+            <ul class="rm-milestones">
+              <li>NSF CISE or DoE grant secured ($1.5M+)</li>
+              <li>National workshop series launched</li>
+              <li>5-department curriculum integration complete</li>
+              <li>Tech transfer office engagement formalized</li>
+            </ul>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#f59e0b">
+            <div class="rm-q-header"><span class="rm-q-badge">Q3 2029</span><span class="rm-q-dates">Jul â€“ Sep 2029</span></div>
+            <h4>Industry Leadership</h4>
+            <ul class="rm-milestones">
+              <li>Industry licensing deal signed (recurring revenue)</li>
+              <li>50+ students trained &amp; mentored since founding</li>
+              <li>International research network: 5 institutions</li>
+              <li>Best-paper awards at 2 conferences</li>
+            </ul>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#f59e0b">
+            <div class="rm-q-header"><span class="rm-q-badge">Q4 2029</span><span class="rm-q-dates">Oct â€“ Dec 2029</span></div>
+            <h4>Facility Expansion</h4>
+            <ul class="rm-milestones">
+              <li>New facility expansion approved by UND</li>
+              <li>3 patent applications filed (cumulative)</li>
+              <li>30+ publications milestone achieved</li>
+              <li>Target: top-20 national smart systems lab ranking</li>
+            </ul>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#f59e0b">
+            <div class="rm-q-header"><span class="rm-q-badge">Q1 2030</span><span class="rm-q-dates">Jan â€“ Mar 2030</span></div>
+            <h4>Regional Hub Status</h4>
+            <ul class="rm-milestones">
+              <li>Officially recognized as regional smart systems hub</li>
+              <li>Annual symposium grows to 300+ attendees</li>
+              <li>Graduate program specialization launched</li>
+              <li>Federal partnership scope expanded</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- â”€â”€ Year 5 â”€â”€ -->
+      <div class="rm-panel rm-panel--hidden" data-panel="5">
+        <div class="rm-quarters">
+          <div class="rm-quarter reveal" style="--qclr:#ec4899">
+            <div class="rm-q-header"><span class="rm-q-badge">Q2 2030</span><span class="rm-q-dates">Apr â€“ Jun 2030</span></div>
+            <h4>National Recognition</h4>
+            <ul class="rm-milestones">
+              <li>Achieve top-10 national smart systems lab ranking</li>
+              <li>Host international research delegations</li>
+              <li>Cumulative funding surpasses $5M</li>
+              <li>40+ peer-reviewed publications milestone</li>
+            </ul>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#ec4899">
+            <div class="rm-q-header"><span class="rm-q-badge">Q3 2030</span><span class="rm-q-dates">Jul â€“ Sep 2030</span></div>
+            <h4>Global Network</h4>
+            <ul class="rm-milestones">
+              <li>International network: EU + Asia (8 institutions)</li>
+              <li>PhD program in Smart Systems officially launched</li>
+              <li>Industry consortium established (10+ companies)</li>
+              <li>Second facility construction begins</li>
+            </ul>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#ec4899">
+            <div class="rm-q-header"><span class="rm-q-badge">Q4 2030</span><span class="rm-q-dates">Oct â€“ Dec 2030</span></div>
+            <h4>Scale &amp; Scope</h4>
+            <ul class="rm-milestones">
+              <li>75+ active student researchers</li>
+              <li>50+ total publications milestone achieved</li>
+              <li>5 patents filed across all research areas</li>
+              <li>3 federal agencies as active partners</li>
+            </ul>
+          </div>
+          <div class="rm-quarter reveal" style="--qclr:#ec4899">
+            <div class="rm-q-header"><span class="rm-q-badge">Q1 2031</span><span class="rm-q-dates">Jan â€“ Mar 2031</span></div>
+            <h4>5-Year Milestone Celebration</h4>
+            <ul class="rm-milestones">
+              <li>5-year impact showcase and celebration event</li>
+              <li>Next-generation research agenda publicly launched</li>
+              <li>UND Smart World confirmed as national model</li>
+              <li>Legacy partnerships secured for the next decade</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== STORYBOARD ===== -->
+  <section class="section storyboard" id="storyboard">
+    <div class="container">
+      <div class="section-tag">The Journey</div>
+      <h2 class="section-title grad">Our Storyboard</h2>
+      <p class="section-sub">How Smart World Lab came to life - from a bold idea to a living innovation platform at UND.</p>
+
+      <div class="sb-overview reveal">
+        <div class="sb-overview-card" style="--sclr:#6366f1">
+          <strong>5 Chapters</strong>
+          <span>From concept to national impact</span>
+        </div>
+        <div class="sb-overview-card" style="--sclr:#06b6d4">
+          <strong>2023-2031</strong>
+          <span>Idea, build, launch, and scale</span>
+        </div>
+        <div class="sb-overview-card" style="--sclr:#10b981">
+          <strong>4 Core Centers</strong>
+          <span>AI, CPS, Digital Twin, Robotics</span>
+        </div>
+      </div>
+
+      <div class="sb-track reveal" role="tablist" aria-label="Storyboard chapters">
+        <button type="button" class="sb-track-btn sb-track-btn--active" data-chapter="01">Ch 01</button>
+        <button type="button" class="sb-track-btn" data-chapter="02">Ch 02</button>
+        <button type="button" class="sb-track-btn" data-chapter="03">Ch 03</button>
+        <button type="button" class="sb-track-btn" data-chapter="04">Ch 04</button>
+        <button type="button" class="sb-track-btn" data-chapter="05">Ch 05</button>
+      </div>
+
+      <div class="sb-timeline">
+
+        <article class="sb-item sb-item--left reveal" data-chapter="01">
+          <div class="sb-node"><div class="sb-node-inner"><i class="fa-solid fa-lightbulb"></i></div></div>
+          <div class="sb-card" style="--sclr:#6366f1">
+            <div class="sb-chapter">Chapter 01</div>
+            <h3>The Spark</h3>
+            <p class="sb-year">2023 - The Idea</p>
+            <p>Faculty at UND's School of Engineering identified a major gap: AI, robotics, and CPS capabilities were strong, but disconnected. A unified lab became the strategic direction.</p>
+            <ul class="sb-points">
+              <li>Cross-department workshops launched</li>
+              <li>Problem statements mapped to state needs</li>
+              <li>Initial vision paper completed</li>
+            </ul>
+            <div class="sb-tags"><span>Problem Identified</span><span>Team Assembled</span></div>
+          </div>
+        </article>
+
+        <article class="sb-item sb-item--right reveal" data-chapter="02">
+          <div class="sb-node"><div class="sb-node-inner"><i class="fa-solid fa-compass-drafting"></i></div></div>
+          <div class="sb-card" style="--sclr:#06b6d4">
+            <div class="sb-chapter">Chapter 02</div>
+            <h3>The Blueprint</h3>
+            <p class="sb-year">2024 - Planning and Design</p>
+            <p>A multidisciplinary team co-designed the four-pillar structure: AI Center, Cyber-Physical Systems, Digital Twins, and Robotics, aligned with UND strategy and regional impact.</p>
+            <ul class="sb-points">
+              <li>Facility and compute requirements modeled</li>
+              <li>5-year milestones and KPIs defined</li>
+              <li>Proposal pipeline initiated</li>
+            </ul>
+            <div class="sb-tags"><span>Architecture Designed</span><span>Budget Scoped</span><span>4 Centers Defined</span></div>
+          </div>
+        </article>
+
+        <article class="sb-item sb-item--left reveal" data-chapter="03">
+          <div class="sb-node"><div class="sb-node-inner"><i class="fa-solid fa-hammer"></i></div></div>
+          <div class="sb-card" style="--sclr:#10b981">
+            <div class="sb-chapter">Chapter 03</div>
+            <h3>Building It</h3>
+            <p class="sb-year">2025 - Construction and Procurement</p>
+            <p>Lab spaces were renovated and high-value infrastructure deployed across compute, sensing, robotics, and immersive systems to support integrated workflows.</p>
+            <ul class="sb-points">
+              <li>GPU infrastructure and edge stacks configured</li>
+              <li>Robotics and UAV test zones commissioned</li>
+              <li>Digital twin integration architecture validated</li>
+            </ul>
+            <div class="sb-tags"><span>H100 / A100 Deployed</span><span>Robotics Online</span><span>XR Lab Ready</span></div>
+          </div>
+        </article>
+
+        <article class="sb-item sb-item--right reveal" data-chapter="04">
+          <div class="sb-node"><div class="sb-node-inner"><i class="fa-solid fa-rocket"></i></div></div>
+          <div class="sb-card" style="--sclr:#f59e0b">
+            <div class="sb-chapter">Chapter 04</div>
+            <h3>Launch Day</h3>
+            <p class="sb-year">April 2026 - Go Live</p>
+            <p>Smart World Lab opened to researchers, students, and partners. Initial projects started, the platform launched, and execution on the 5-year roadmap began.</p>
+            <ul class="sb-points">
+              <li>First cohort and pilot projects activated</li>
+              <li>Public website and engagement channels launched</li>
+              <li>Industry and agency outreach started</li>
+            </ul>
+            <div class="sb-tags"><span>Live Now</span><span>First Cohort Active</span><span>5-Year Plan Running</span></div>
+          </div>
+        </article>
+
+        <article class="sb-item sb-item--left reveal" data-chapter="05">
+          <div class="sb-node sb-node--future"><div class="sb-node-inner"><i class="fa-solid fa-star"></i></div></div>
+          <div class="sb-card sb-card--future" style="--sclr:#ec4899">
+            <div class="sb-chapter">Chapter 05</div>
+            <h3>What's Next</h3>
+            <p class="sb-year">2027-2031 - The Horizon</p>
+            <p>Scaling toward national recognition through sustained funding, strategic partnerships, high-impact publications, patents, and workforce development.</p>
+            <ul class="sb-points">
+              <li>Multi-year federal contracts targeted</li>
+              <li>Interstate and global collaborations expanded</li>
+              <li>Smart World model replicated across domains</li>
+            </ul>
+            <div class="sb-tags"><span>In Progress</span><span>National Model</span><span>Legacy in the Making</span></div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY / WHAT / HOW ===== -->
+  <section class="section why-what-how" id="why-what-how">
+    <div class="container">
+      <div class="section-tag">Challenges &amp; Solutions</div>
+      <h2 class="section-title grad">Why Â· What Â· How</h2>
+      <p class="section-sub">The three-lens framework that guides every decision at Smart World Lab â€” from identifying real problems to delivering real solutions.</p>
+
+      <div class="wwh-hero reveal">
+        <div class="wwh-pill" style="--wclr:#6366f1">WHY</div>
+        <div class="wwh-connector"><div class="wwh-connector-line"></div></div>
+        <div class="wwh-pill" style="--wclr:#06b6d4">WHAT</div>
+        <div class="wwh-connector"><div class="wwh-connector-line"></div></div>
+        <div class="wwh-pill" style="--wclr:#10b981">HOW</div>
+      </div>
+
+      <!-- â”€â”€ WHY â”€â”€ -->
+      <div class="wwh-block reveal">
+        <div class="wwh-block-label" style="--wclr:#6366f1">
+          <div class="wwh-block-icon"><i class="fa-solid fa-circle-question"></i></div>
+          <div>
+            <div class="wwh-block-title">WHY</div>
+            <div class="wwh-block-sub">The Challenges We Face</div>
+          </div>
+        </div>
+        <div class="wwh-challenges">
+          <div class="wwh-ch-card reveal" style="--wclr:#6366f1">
+            <div class="wwh-ch-num">01</div>
+            <h4>Research Fragmentation</h4>
+            <p>AI, robotics, sensing, and simulation tools are scattered across departments with no shared infrastructure, making cross-disciplinary projects slow and expensive.</p>
+          </div>
+          <div class="wwh-ch-card reveal" style="--wclr:#6366f1">
+            <div class="wwh-ch-num">02</div>
+            <h4>Workforce Gap</h4>
+            <p>Students graduate without hands-on experience in real CPS and AI workflows â€” the exact skills that industry and government agencies urgently need.</p>
+          </div>
+          <div class="wwh-ch-card reveal" style="--wclr:#6366f1">
+            <div class="wwh-ch-num">03</div>
+            <h4>Limited Competitiveness</h4>
+            <p>Without shared research-grade infrastructure, UND faculty struggle to compete for large federal grants that require demonstrated facilities and collaboration.</p>
+          </div>
+          <div class="wwh-ch-card reveal" style="--wclr:#6366f1">
+            <div class="wwh-ch-num">04</div>
+            <h4>Technology Silos</h4>
+            <p>Smart city, autonomous systems, and digital twin technologies advance independently â€” preventing the integrated solutions real-world deployments demand.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- â”€â”€ WHAT â”€â”€ -->
+      <div class="wwh-block reveal">
+        <div class="wwh-block-label" style="--wclr:#06b6d4">
+          <div class="wwh-block-icon"><i class="fa-solid fa-cubes"></i></div>
+          <div>
+            <div class="wwh-block-title">WHAT</div>
+            <div class="wwh-block-sub">What Smart World Lab Delivers</div>
+          </div>
+        </div>
+        <div class="wwh-what-grid">
+          <div class="wwh-what-card reveal" style="--wclr:#06b6d4">
+            <i class="fa-solid fa-microchip wwh-what-icon"></i>
+            <h4>Unified AI &amp; CPS Platform</h4>
+            <p>One integrated lab where AI, sensing, digital twins, and robotics share infrastructure, data pipelines, and compute resources.</p>
+          </div>
+          <div class="wwh-what-card reveal" style="--wclr:#06b6d4">
+            <i class="fa-solid fa-graduation-cap wwh-what-icon"></i>
+            <h4>Workforce-Ready Education</h4>
+            <p>Hands-on training programs, capstone projects, and research mentorship that produce graduates ready for the AI-driven economy.</p>
+          </div>
+          <div class="wwh-what-card reveal" style="--wclr:#06b6d4">
+            <i class="fa-solid fa-handshake wwh-what-icon"></i>
+            <h4>Industry &amp; Government Bridge</h4>
+            <p>Structured partnerships, MoUs, and contract research that turn lab breakthroughs into deployable products and policies.</p>
+          </div>
+          <div class="wwh-what-card reveal" style="--wclr:#06b6d4">
+            <i class="fa-solid fa-earth-americas wwh-what-icon"></i>
+            <h4>Regional Impact Engine</h4>
+            <p>Smart infrastructure solutions tailored to North Dakota's needs â€” agriculture, energy, transportation, and emergency response.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- â”€â”€ HOW â”€â”€ -->
+      <div class="wwh-block reveal">
+        <div class="wwh-block-label" style="--wclr:#10b981">
+          <div class="wwh-block-icon"><i class="fa-solid fa-gears"></i></div>
+          <div>
+            <div class="wwh-block-title">HOW</div>
+            <div class="wwh-block-sub">Our Approach &amp; Methods</div>
+          </div>
+        </div>
+        <div class="wwh-how-steps">
+          <div class="wwh-how-step reveal">
+            <div class="wwh-step-num" style="--wclr:#10b981">1</div>
+            <div class="wwh-step-body">
+              <h4>Sense the Problem</h4>
+              <p>We deploy multi-modal sensor arrays â€” LiDAR, thermal, hyperspectral â€” to collect high-fidelity real-world data, ensuring our models are grounded in reality rather than assumptions.</p>
+            </div>
+          </div>
+          <div class="wwh-how-step reveal">
+            <div class="wwh-step-num" style="--wclr:#10b981">2</div>
+            <div class="wwh-step-body">
+              <h4>Compute &amp; Learn</h4>
+              <p>Our NVIDIA H100 / A100 cluster processes large-scale datasets using state-of-the-art deep learning, reinforcement learning, and edge AI pipelines to extract actionable insight.</p>
+            </div>
+          </div>
+          <div class="wwh-how-step reveal">
+            <div class="wwh-step-num" style="--wclr:#10b981">3</div>
+            <div class="wwh-step-body">
+              <h4>Simulate &amp; Validate</h4>
+              <p>Digital twin environments and physics-based XR simulations let us test solutions safely before field deployment â€” reducing cost, risk, and iteration time dramatically.</p>
+            </div>
+          </div>
+          <div class="wwh-how-step reveal">
+            <div class="wwh-step-num" style="--wclr:#10b981">4</div>
+            <div class="wwh-step-body">
+              <h4>Deploy &amp; Automate</h4>
+              <p>Autonomous robots, embedded AI agents, and smart control systems carry validated solutions from the lab into real infrastructure â€” with continuous monitoring and feedback loops.</p>
+            </div>
+          </div>
+          <div class="wwh-how-step reveal">
+            <div class="wwh-step-num" style="--wclr:#10b981">5</div>
+            <div class="wwh-step-body">
+              <h4>Collaborate &amp; Scale</h4>
+              <p>Every solution is published, open-sourced where possible, and shared with industry and government partners â€” creating a multiplier effect that extends our impact far beyond UND.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== CPS LIFECYCLE ===== -->
+  <section class="section lifecycle" id="lifecycle">
+    <div class="container">
+      <div class="section-tag">Core Architecture</div>
+      <h2 class="section-title grad">CPS Lifecycle Framework</h2>
+      <p class="section-sub">The Smart World Lab follows a complete Cyber-Physical Systems lifecycle, enabling seamless end-to-end system development.</p>
+
+      <!-- ── Circular orbit layout ── -->
+      <div class="lc-orbit-wrap reveal">
+        <div class="lc-orbit">
+
+          <!-- SVG ring + animated arc -->
+          <svg class="lc-ring-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#6366f1" stop-opacity="0.5"/>
+                <stop offset="40%"  stop-color="#06b6d4" stop-opacity="0.4"/>
+                <stop offset="70%"  stop-color="#10b981" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.5"/>
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <!-- outer dashed guide -->
+            <circle cx="250" cy="250" r="200" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="6 6"/>
+            <!-- animated gradient ring -->
+            <circle class="lc-ring-anim" cx="250" cy="250" r="200" fill="none" stroke="url(#ringGrad)" stroke-width="2" filter="url(#glow)"/>
+            <!-- connector spokes -->
+            <line class="lc-spoke" x1="250" y1="50"  x2="250" y2="140" stroke="rgba(99,102,241,0.25)" stroke-width="1" stroke-dasharray="3 4"/>
+            <line class="lc-spoke" x1="423" y1="150" x2="340" y2="197" stroke="rgba(6,182,212,0.25)"  stroke-width="1" stroke-dasharray="3 4"/>
+            <line class="lc-spoke" x1="423" y1="350" x2="340" y2="303" stroke="rgba(16,185,129,0.25)" stroke-width="1" stroke-dasharray="3 4"/>
+            <line class="lc-spoke" x1="250" y1="450" x2="250" y2="360" stroke="rgba(245,158,11,0.25)" stroke-width="1" stroke-dasharray="3 4"/>
+            <line class="lc-spoke" x1="77"  y1="350" x2="160" y2="303" stroke="rgba(236,72,153,0.25)" stroke-width="1" stroke-dasharray="3 4"/>
+            <line class="lc-spoke" x1="77"  y1="150" x2="160" y2="197" stroke="rgba(139,92,246,0.25)" stroke-width="1" stroke-dasharray="3 4"/>
+          </svg>
+
+          <!-- center OS button -->
+          <a href="https://xtreamsmarx.github.io/SmartWorld/home/home.html" target="_blank" class="lc-center-btn">
+            <div class="lc-center-ring lc-center-ring--1"></div>
+            <div class="lc-center-ring lc-center-ring--2"></div>
+            <div class="lc-center-ring lc-center-ring--3"></div>
+            <div class="lc-center-inner">
+              <i class="fa-solid fa-globe"></i>
+              <span class="lc-center-title">Smart World</span>
+              <span class="lc-center-sub">OS Platform</span>
+              <span class="lc-center-launch">Launch ↗</span>
+            </div>
+          </a>
+
+          <!-- 6 stage nodes — positioned with CSS custom props -->
+          <!-- top: Sense (0°) -->
+          <button class="lc-node lc-node--active" data-step="sense" style="--nx:50%;--ny:3%;--nclr:#6366f1">
+            <div class="lc-node-icon"><i class="fa-solid fa-satellite-dish"></i></div>
+            <div class="lc-node-label">01 Sense</div>
+          </button>
+          <!-- top-right: Compute (60°) -->
+          <button class="lc-node" data-step="compute" style="--nx:86%;--ny:27%;--nclr:#06b6d4">
+            <div class="lc-node-icon"><i class="fa-solid fa-microchip"></i></div>
+            <div class="lc-node-label">02 Compute</div>
+          </button>
+          <!-- bottom-right: Simulate (120°) -->
+          <button class="lc-node" data-step="simulate" style="--nx:86%;--ny:69%;--nclr:#10b981">
+            <div class="lc-node-icon"><i class="fa-solid fa-cube"></i></div>
+            <div class="lc-node-label">03 Simulate</div>
+          </button>
+          <!-- bottom: Fabricate (180°) -->
+          <button class="lc-node" data-step="fabricate" style="--nx:50%;--ny:88%;--nclr:#f59e0b">
+            <div class="lc-node-icon"><i class="fa-solid fa-print"></i></div>
+            <div class="lc-node-label">04 Fabricate</div>
+          </button>
+          <!-- bottom-left: Deploy (240°) -->
+          <button class="lc-node" data-step="deploy" style="--nx:14%;--ny:69%;--nclr:#ec4899">
+            <div class="lc-node-icon"><i class="fa-solid fa-robot"></i></div>
+            <div class="lc-node-label">05 Deploy</div>
+          </button>
+          <!-- top-left: Monitor (300°) -->
+          <button class="lc-node" data-step="monitor" style="--nx:14%;--ny:27%;--nclr:#8b5cf6">
+            <div class="lc-node-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="lc-node-label">06 Monitor</div>
+          </button>
+
+        </div><!-- /lc-orbit -->
+      </div><!-- /lc-orbit-wrap -->
+
+      <!-- ── Detail cards (shown on click, all visible by default) ── -->
+      <div class="lc-details">
+        <div class="lc-detail lc-detail--active" id="lc-detail-sense" style="--clr:#6366f1">
+          <div class="lc-d-icon"><i class="fa-solid fa-satellite-dish"></i></div>
+          <div class="lc-d-num">01</div>
+          <h3>Sense</h3>
+          <p>Multi-modal real-world data acquisition using LiDAR, hyperspectral imaging, thermal cameras, and depth sensors for high-fidelity environment understanding.</p>
+          <ul class="lc-tags"><li>LiDAR (Ouster OS1)</li><li>Hyperspectral</li><li>Thermal (FLIR)</li><li>Intel RealSense</li></ul>
+        </div>
+        <div class="lc-detail" id="lc-detail-compute" style="--clr:#06b6d4">
+          <div class="lc-d-icon"><i class="fa-solid fa-microchip"></i></div>
+          <div class="lc-d-num">02</div>
+          <h3>Compute</h3>
+          <p>Large-scale AI model training and real-time processing using research-grade NVIDIA H100 and A100 GPU supercomputing infrastructure with continuous multi-user workloads.</p>
+          <ul class="lc-tags"><li>NVIDIA H100</li><li>NVIDIA A100</li><li>Threadripper Workstation</li></ul>
+        </div>
+        <div class="lc-detail" id="lc-detail-simulate" style="--clr:#10b981">
+          <div class="lc-d-icon"><i class="fa-solid fa-cube"></i></div>
+          <div class="lc-d-num">03</div>
+          <h3>Simulate</h3>
+          <p>High-fidelity digital twin creation and physics-based simulation environments with XR platforms for immersive interaction and AI-driven predictive modeling.</p>
+          <ul class="lc-tags"><li>Digital Twins</li><li>XR / Meta Quest 3</li><li>AI Simulation</li></ul>
+        </div>
+        <div class="lc-detail" id="lc-detail-fabricate" style="--clr:#f59e0b">
+          <div class="lc-d-icon"><i class="fa-solid fa-print"></i></div>
+          <div class="lc-d-num">04</div>
+          <h3>Fabricate</h3>
+          <p>Transition from digital design to physical systems using industrial 3D printing, CNC machining, and PCB fabrication for rapid prototyping and hardware development.</p>
+          <ul class="lc-tags"><li>Builder Extreme 2000 PRO</li><li>PCB Milling</li><li>Voltera V-One</li></ul>
+        </div>
+        <div class="lc-detail" id="lc-detail-deploy" style="--clr:#ec4899">
+          <div class="lc-d-icon"><i class="fa-solid fa-robot"></i></div>
+          <div class="lc-d-num">05</div>
+          <h3>Deploy</h3>
+          <p>Real-world implementation and validation through industrial robotics, mobile platforms, and UAV systems bridging the gap between simulation and application.</p>
+          <ul class="lc-tags"><li>UR5e Robotic Arm</li><li>TurtleBot 4</li><li>DJI Matrice 30T</li></ul>
+        </div>
+        <div class="lc-detail" id="lc-detail-monitor" style="--clr:#8b5cf6">
+          <div class="lc-d-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <div class="lc-d-num">06</div>
+          <h3>Monitor</h3>
+          <p>Continuous system observation and adaptive feedback through edge AI devices, IoT networks, and data analytics platforms enabling systems that learn and evolve.</p>
+          <ul class="lc-tags"><li>Jetson Nano</li><li>IoT Systems</li><li>Edge AI</li></ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== AI ICEBERG ===== -->
+  <section class="section ai-iceberg" id="ai-iceberg">
+    <div class="container">
+      <div class="section-tag">AI System Reality</div>
+      <h2 class="section-title grad">AI Iceberg: Inference on Top, Infrastructure Below</h2>
+      <p class="section-sub">What people see is fast AI inference. What enables it is a deeper stack under the surface: data, training, tuning, compute, and deployment operations.</p>
+
+      <div class="iceberg-stage reveal" id="icebergStage">
+        <div class="iceberg-sky-glow"></div>
+
+        <div class="iceberg-waterline">
+          <span>Waterline</span>
+        </div>
+
+        <div class="iceberg-tip" data-ice-step="inference">
+          <div class="ice-label ice-label--top">Visible Outcome</div>
+          <div class="ice-core">
+            <i class="fa-solid fa-bolt"></i>
+            <h3>AI Inference</h3>
+            <p>Real-time predictions, responses, and decisions.</p>
+          </div>
+        </div>
+
+        <div class="iceberg-body">
+          <article class="ice-layer" data-ice-step="data" style="--ic:#06b6d4">
+            <div class="ice-layer-head"><i class="fa-solid fa-database"></i><strong>Data Foundation</strong></div>
+            <p>Collection, labeling, quality control, lineage, and governance.</p>
+          </article>
+          <article class="ice-layer" data-ice-step="training" style="--ic:#6366f1">
+            <div class="ice-layer-head"><i class="fa-solid fa-dumbbell"></i><strong>Model Training</strong></div>
+            <p>Large-scale optimization loops with curated datasets and validation.</p>
+          </article>
+          <article class="ice-layer" data-ice-step="tuning" style="--ic:#8b5cf6">
+            <div class="ice-layer-head"><i class="fa-solid fa-sliders"></i><strong>Fine-Tuning</strong></div>
+            <p>Domain adaptation, alignment, prompt tuning, and performance shaping.</p>
+          </article>
+          <article class="ice-layer" data-ice-step="compute" style="--ic:#10b981">
+            <div class="ice-layer-head"><i class="fa-solid fa-microchip"></i><strong>Compute Stack</strong></div>
+            <p>GPU clusters, memory bandwidth, orchestration, and acceleration.</p>
+          </article>
+          <article class="ice-layer" data-ice-step="deploy" style="--ic:#f59e0b">
+            <div class="ice-layer-head"><i class="fa-solid fa-rocket"></i><strong>Deployment &amp; Ops</strong></div>
+            <p>Serving, monitoring, drift detection, rollback, and safety controls.</p>
+          </article>
+        </div>
+
+        <div class="iceberg-current"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS HUB ===== -->
+  <section class="section projects-hub" id="projects-hub">
+    <div class="container">
+      <div class="section-tag">Unified Efforts</div>
+      <h2 class="section-title grad">Projects &amp; Initiatives Hub</h2>
+      <p class="section-sub">Every initiative at Smart World Lab spans multiple lifecycle stages. Select a project to see exactly where it lives — from sensing the world to deploying intelligent solutions.</p>
+
+      <!-- lifecycle stage legend -->
+      <div class="ph-legend reveal">
+        <div class="ph-leg-item" style="--lclr:#6366f1"><span class="ph-leg-dot"></span>Sense</div>
+        <div class="ph-leg-item" style="--lclr:#06b6d4"><span class="ph-leg-dot"></span>Compute</div>
+        <div class="ph-leg-item" style="--lclr:#10b981"><span class="ph-leg-dot"></span>Simulate</div>
+        <div class="ph-leg-item" style="--lclr:#f59e0b"><span class="ph-leg-dot"></span>Fabricate</div>
+        <div class="ph-leg-item" style="--lclr:#ec4899"><span class="ph-leg-dot"></span>Deploy</div>
+        <div class="ph-leg-item" style="--lclr:#8b5cf6"><span class="ph-leg-dot"></span>Monitor</div>
+      </div>
+
+      <!-- filter tabs -->
+      <div class="ph-filters reveal">
+        <button class="ph-filter ph-filter--active" data-filter="all">All Projects</button>
+        <button class="ph-filter" data-filter="ai">AI &amp; Learning</button>
+        <button class="ph-filter" data-filter="cps">CPS &amp; Infrastructure</button>
+        <button class="ph-filter" data-filter="robotics">Robotics &amp; UAV</button>
+        <button class="ph-filter" data-filter="dt">Digital Twins</button>
+        <button class="ph-filter" data-filter="edu">Education</button>
+      </div>
+
+      <!-- project cards grid -->
+      <div class="ph-grid">
+
+        <!-- 1. Human AI Learning Gateway -->
+        <div class="ph-card reveal" data-tags="ai edu">
+          <div class="ph-card-top" style="--pclr:#6366f1">
+            <div class="ph-card-icon"><i class="fa-solid fa-brain-circuit"></i></div>
+            <div class="ph-card-meta">
+              <span class="ph-cat">AI · Education</span>
+              <h3>Human–AI Learning Gateway</h3>
+            </div>
+            <span class="ph-status ph-status--active">Active</span>
+          </div>
+          <p>An intelligent platform that personalises academic and research workflows using large language models, adaptive tutoring, and real-time feedback — connecting students, faculty, and lab resources through a unified AI-powered interface.</p>
+          <div class="ph-lifecycle-bar">
+            <div class="ph-stage" style="--sclr:#06b6d4" title="Compute"><i class="fa-solid fa-microchip"></i><span>Compute</span></div>
+            <div class="ph-stage" style="--sclr:#10b981" title="Simulate"><i class="fa-solid fa-cube"></i><span>Simulate</span></div>
+            <div class="ph-stage" style="--sclr:#8b5cf6" title="Monitor"><i class="fa-solid fa-chart-line"></i><span>Monitor</span></div>
+          </div>
+          <div class="ph-links">
+            <span class="ph-tag">LLM / GPT</span><span class="ph-tag">Adaptive Learning</span><span class="ph-tag">AI Interface</span>
+          </div>
+        </div>
+
+        <!-- 2. Smart Infrastructure Monitor -->
+        <div class="ph-card reveal" data-tags="cps">
+          <div class="ph-card-top" style="--pclr:#06b6d4">
+            <div class="ph-card-icon"><i class="fa-solid fa-bridge"></i></div>
+            <div class="ph-card-meta">
+              <span class="ph-cat">CPS · Infrastructure</span>
+              <h3>Smart Infrastructure Monitor</h3>
+            </div>
+            <span class="ph-status ph-status--active">Active</span>
+          </div>
+          <p>Continuous structural health monitoring of bridges, roads, and buildings using multi-modal sensor networks (LiDAR, thermal, strain gauges) feeding AI models that predict failures before they occur.</p>
+          <div class="ph-lifecycle-bar">
+            <div class="ph-stage" style="--sclr:#6366f1" title="Sense"><i class="fa-solid fa-satellite-dish"></i><span>Sense</span></div>
+            <div class="ph-stage" style="--sclr:#06b6d4" title="Compute"><i class="fa-solid fa-microchip"></i><span>Compute</span></div>
+            <div class="ph-stage" style="--sclr:#10b981" title="Simulate"><i class="fa-solid fa-cube"></i><span>Simulate</span></div>
+            <div class="ph-stage" style="--sclr:#8b5cf6" title="Monitor"><i class="fa-solid fa-chart-line"></i><span>Monitor</span></div>
+          </div>
+          <div class="ph-links">
+            <span class="ph-tag">LiDAR</span><span class="ph-tag">Thermal Imaging</span><span class="ph-tag">Predictive AI</span>
+          </div>
+        </div>
+
+        <!-- 3. Urban Digital Twin -->
+        <div class="ph-card reveal" data-tags="dt cps">
+          <div class="ph-card-top" style="--pclr:#10b981">
+            <div class="ph-card-icon"><i class="fa-solid fa-city"></i></div>
+            <div class="ph-card-meta">
+              <span class="ph-cat">Digital Twin · CPS</span>
+              <h3>Urban Digital Twin Platform</h3>
+            </div>
+            <span class="ph-status ph-status--planning">Planning</span>
+          </div>
+          <p>A living digital replica of UND campus and surrounding urban infrastructure — continuously updated from real sensors, used to test smart city interventions, energy optimisations, and emergency scenarios in simulation before real deployment.</p>
+          <div class="ph-lifecycle-bar">
+            <div class="ph-stage" style="--sclr:#6366f1" title="Sense"><i class="fa-solid fa-satellite-dish"></i><span>Sense</span></div>
+            <div class="ph-stage" style="--sclr:#06b6d4" title="Compute"><i class="fa-solid fa-microchip"></i><span>Compute</span></div>
+            <div class="ph-stage" style="--sclr:#10b981" title="Simulate"><i class="fa-solid fa-cube"></i><span>Simulate</span></div>
+            <div class="ph-stage" style="--sclr:#8b5cf6" title="Monitor"><i class="fa-solid fa-chart-line"></i><span>Monitor</span></div>
+          </div>
+          <div class="ph-links">
+            <span class="ph-tag">Digital Twin</span><span class="ph-tag">Smart City</span><span class="ph-tag">XR Visualisation</span>
+          </div>
+        </div>
+
+        <!-- 4. Autonomous UAV Inspection -->
+        <div class="ph-card reveal" data-tags="robotics cps">
+          <div class="ph-card-top" style="--pclr:#f59e0b">
+            <div class="ph-card-icon"><i class="fa-solid fa-helicopter"></i></div>
+            <div class="ph-card-meta">
+              <span class="ph-cat">Robotics · UAV</span>
+              <h3>Autonomous UAV Inspection</h3>
+            </div>
+            <span class="ph-status ph-status--active">Active</span>
+          </div>
+          <p>DJI Matrice 30T and custom PX4 drones autonomously inspect critical infrastructure — pipelines, wind turbines, bridges — using onboard AI to flag anomalies in real time and feed data back to the digital twin.</p>
+          <div class="ph-lifecycle-bar">
+            <div class="ph-stage" style="--sclr:#6366f1" title="Sense"><i class="fa-solid fa-satellite-dish"></i><span>Sense</span></div>
+            <div class="ph-stage" style="--sclr:#06b6d4" title="Compute"><i class="fa-solid fa-microchip"></i><span>Compute</span></div>
+            <div class="ph-stage" style="--sclr:#ec4899" title="Deploy"><i class="fa-solid fa-robot"></i><span>Deploy</span></div>
+            <div class="ph-stage" style="--sclr:#8b5cf6" title="Monitor"><i class="fa-solid fa-chart-line"></i><span>Monitor</span></div>
+          </div>
+          <div class="ph-links">
+            <span class="ph-tag">DJI Matrice 30T</span><span class="ph-tag">PX4</span><span class="ph-tag">Edge AI</span>
+          </div>
+        </div>
+
+        <!-- 5. AI-Driven Fabrication Lab -->
+        <div class="ph-card reveal" data-tags="cps robotics">
+          <div class="ph-card-top" style="--pclr:#ec4899">
+            <div class="ph-card-icon"><i class="fa-solid fa-print"></i></div>
+            <div class="ph-card-meta">
+              <span class="ph-cat">Fabrication · CPS</span>
+              <h3>AI-Driven Fabrication Lab</h3>
+            </div>
+            <span class="ph-status ph-status--active">Active</span>
+          </div>
+          <p>Closing the loop from digital design to physical object — AI-optimised generative design, simulation-validated prototypes, and automated 3D printing workflows using the Builder Extreme 2000 PRO and PCB milling tools.</p>
+          <div class="ph-lifecycle-bar">
+            <div class="ph-stage" style="--sclr:#06b6d4" title="Compute"><i class="fa-solid fa-microchip"></i><span>Compute</span></div>
+            <div class="ph-stage" style="--sclr:#10b981" title="Simulate"><i class="fa-solid fa-cube"></i><span>Simulate</span></div>
+            <div class="ph-stage" style="--sclr:#f59e0b" title="Fabricate"><i class="fa-solid fa-print"></i><span>Fabricate</span></div>
+            <div class="ph-stage" style="--sclr:#ec4899" title="Deploy"><i class="fa-solid fa-robot"></i><span>Deploy</span></div>
+          </div>
+          <div class="ph-links">
+            <span class="ph-tag">Builder Extreme</span><span class="ph-tag">PCB Milling</span><span class="ph-tag">Generative Design</span>
+          </div>
+        </div>
+
+        <!-- 6. Immersive XR Training -->
+        <div class="ph-card reveal" data-tags="edu dt">
+          <div class="ph-card-top" style="--pclr:#8b5cf6">
+            <div class="ph-card-icon"><i class="fa-solid fa-vr-cardboard"></i></div>
+            <div class="ph-card-meta">
+              <span class="ph-cat">Education · Digital Twin</span>
+              <h3>Immersive XR Training Environments</h3>
+            </div>
+            <span class="ph-status ph-status--planning">Planning</span>
+          </div>
+          <p>Meta Quest 3 and custom XR platforms create fully immersive training scenarios — students and engineers rehearse dangerous maintenance tasks, emergency response, and complex assembly in safe, photorealistic simulation before touching real systems.</p>
+          <div class="ph-lifecycle-bar">
+            <div class="ph-stage" style="--sclr:#10b981" title="Simulate"><i class="fa-solid fa-cube"></i><span>Simulate</span></div>
+            <div class="ph-stage" style="--sclr:#ec4899" title="Deploy"><i class="fa-solid fa-robot"></i><span>Deploy</span></div>
+            <div class="ph-stage" style="--sclr:#8b5cf6" title="Monitor"><i class="fa-solid fa-chart-line"></i><span>Monitor</span></div>
+          </div>
+          <div class="ph-links">
+            <span class="ph-tag">Meta Quest 3</span><span class="ph-tag">XR / AR / VR</span><span class="ph-tag">Haptic Feedback</span>
+          </div>
+        </div>
+
+        <!-- 7. Edge AI for Smart Agriculture -->
+        <div class="ph-card reveal" data-tags="cps ai">
+          <div class="ph-card-top" style="--pclr:#14b8a6">
+            <div class="ph-card-icon"><i class="fa-solid fa-seedling"></i></div>
+            <div class="ph-card-meta">
+              <span class="ph-cat">CPS · AI · ND Focus</span>
+              <h3>Edge AI for Smart Agriculture</h3>
+            </div>
+            <span class="ph-status ph-status--planning">Planning</span>
+          </div>
+          <p>North Dakota's agricultural sector powered by Jetson Nano edge devices, hyperspectral crop analysis, and AI models running directly in the field — monitoring soil health, crop stress, and irrigation needs without cloud dependency.</p>
+          <div class="ph-lifecycle-bar">
+            <div class="ph-stage" style="--sclr:#6366f1" title="Sense"><i class="fa-solid fa-satellite-dish"></i><span>Sense</span></div>
+            <div class="ph-stage" style="--sclr:#06b6d4" title="Compute"><i class="fa-solid fa-microchip"></i><span>Compute</span></div>
+            <div class="ph-stage" style="--sclr:#ec4899" title="Deploy"><i class="fa-solid fa-robot"></i><span>Deploy</span></div>
+            <div class="ph-stage" style="--sclr:#8b5cf6" title="Monitor"><i class="fa-solid fa-chart-line"></i><span>Monitor</span></div>
+          </div>
+          <div class="ph-links">
+            <span class="ph-tag">Jetson Nano</span><span class="ph-tag">Hyperspectral</span><span class="ph-tag">IoT</span>
+          </div>
+        </div>
+
+        <!-- 8. CPS Cybersecurity Testbed -->
+        <div class="ph-card reveal" data-tags="cps ai">
+          <div class="ph-card-top" style="--pclr:#f97316">
+            <div class="ph-card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="ph-card-meta">
+              <span class="ph-cat">CPS · Cybersecurity</span>
+              <h3>CPS Cybersecurity Testbed</h3>
+            </div>
+            <span class="ph-status ph-status--planning">Planning</span>
+          </div>
+          <p>A dedicated safe-to-fail environment for testing cyber attacks against physical infrastructure control systems — enabling researchers to develop and validate AI-based intrusion detection, anomaly response, and resilience frameworks.</p>
+          <div class="ph-lifecycle-bar">
+            <div class="ph-stage" style="--sclr:#6366f1" title="Sense"><i class="fa-solid fa-satellite-dish"></i><span>Sense</span></div>
+            <div class="ph-stage" style="--sclr:#10b981" title="Simulate"><i class="fa-solid fa-cube"></i><span>Simulate</span></div>
+            <div class="ph-stage" style="--sclr:#ec4899" title="Deploy"><i class="fa-solid fa-robot"></i><span>Deploy</span></div>
+            <div class="ph-stage" style="--sclr:#8b5cf6" title="Monitor"><i class="fa-solid fa-chart-line"></i><span>Monitor</span></div>
+          </div>
+          <div class="ph-links">
+            <span class="ph-tag">Intrusion Detection</span><span class="ph-tag">AI Resilience</span><span class="ph-tag">SCADA</span>
+          </div>
+        </div>
+
+      </div><!-- /ph-grid -->
+    </div>
+  </section>
+
+  <!-- ===== 3D SMART CITY ===== -->
+  <section class="section smart-city-3d" id="smart-city-3d">
+    <div class="container">
+      <div class="section-tag">Interactive 3D Model</div>
+      <h2 class="section-title grad">Smart City Visualization</h2>
+      <p class="section-sub">A procedural WebGL smart city — drag to rotate, scroll to zoom. This represents the kind of cyber-physical environment the Smart World Lab designs, deploys, and monitors.</p>
+      <div class="sc3d-wrap reveal">
+        <canvas id="sc3dCanvas"></canvas>
+        <div class="sc3d-controls">
+          <span><i class="fa-solid fa-hand-pointer"></i> Drag to rotate</span>
+          <span><i class="fa-solid fa-magnifying-glass-plus"></i> Scroll to zoom</span>
+          <span><i class="fa-solid fa-rotate"></i> Auto-spins when idle</span>
+        </div>
+      </div>
+
+      <!-- UND Campus Map -->
+      <div class="und-map-wrap reveal">
+        <div class="und-map-header">
+          <span class="und-map-tag"><i class="fa-solid fa-earth-americas"></i> Real-World Testbed</span>
+          <h3 class="und-map-title">UND Campus — Grand Forks, ND</h3>
+          <p class="und-map-sub">The Smart World Lab is physically embedded across the UND campus, deploying sensors, networks, and AI systems in a live urban environment.</p>
+          <ul class="und-map-legend">
+            <li><span class="uml-dot" style="--dc:var(--primary)"></span>Smart World Lab HQ</li>
+            <li><span class="uml-dot" style="--dc:var(--cyan)"></span>IoT Sensor Grid</li>
+            <li><span class="uml-dot" style="--dc:var(--amber)"></span>UAV Test Zone</li>
+          </ul>
+        </div>
+        <div class="und-map-frame-wrap">
+          <iframe
+            class="und-map-frame"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-97.1050%2C47.9150%2C-97.0550%2C47.9380&amp;layer=mapnik&amp;marker=47.9253%2C-97.0770"
+            title="UND Campus Map — Grand Forks, North Dakota"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+          <div class="und-map-badge"><i class="fa-solid fa-map"></i> UND Campus</div>
+        </div>
+        <a class="und-map-link" href="https://www.openstreetmap.org/#map=15/47.9253/-97.0770" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-up-right-from-square"></i> Open full map
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RESEARCH AREAS ===== -->
+  <section class="section research" id="research">
+    <div class="container">
+      <div class="section-tag">What We Do</div>
+      <h2 class="section-title">Research Areas &amp; Objectives</h2>
+      <p class="section-sub">Eight strategic research and operational objectives driving the Smart World Lab.</p>
+      <div class="research-grid">
+
+        <div class="research-card reveal">
+          <div class="rc-icon" style="--clr:#6366f1"><i class="fa-solid fa-link"></i></div>
+          <div class="rc-label">Objective 1</div>
+          <h3>Cyber-Physical Systems</h3>
+          <p>End-to-end CPS lifecycle platform enabling real-world data acquisition, AI model training, simulation, fabrication, and deployment for smart cities and infrastructure monitoring.</p>
+          <ul class="tag-list"><li>CPS Lifecycle</li><li>Infrastructure</li><li>Sensing</li></ul>
+        </div>
+
+        <div class="research-card reveal">
+          <div class="rc-icon" style="--clr:#06b6d4"><i class="fa-solid fa-brain"></i></div>
+          <div class="rc-label">Objective 2</div>
+          <h3>AI Engineering &amp; Digital Twins</h3>
+          <p>Research-grade AI supercomputing (H100/A100) for digital twin development of infrastructure and urban systems, large-scale simulation, and real-time predictive modeling.</p>
+          <ul class="tag-list"><li>H100/A100</li><li>Digital Twin</li><li>Predictive Modeling</li></ul>
+        </div>
+
+        <div class="research-card reveal">
+          <div class="rc-icon" style="--clr:#10b981"><i class="fa-solid fa-people-group"></i></div>
+          <div class="rc-label">Objective 3</div>
+          <h3>Multidisciplinary Research</h3>
+          <p>Shared university-wide infrastructure enabling collaboration across Civil, Mechanical, Electrical Engineering, Computer Science, and Aerospace Engineering.</p>
+          <ul class="tag-list"><li>Civil Engineering</li><li>Aerospace</li><li>CS &amp; EE</li></ul>
+        </div>
+
+        <div class="research-card reveal">
+          <div class="rc-icon" style="--clr:#f59e0b"><i class="fa-solid fa-print"></i></div>
+          <div class="rc-label">Objective 4</div>
+          <h3>Digital Fabrication</h3>
+          <p>Industrial-scale fabrication including a $40,000 large-format 3D printer and PCB fabrication tools for rapid design-to-deployment workflows and real-world validation.</p>
+          <ul class="tag-list"><li>3D Printing</li><li>PCB Design</li><li>Prototyping</li></ul>
+        </div>
+
+        <div class="research-card reveal">
+          <div class="rc-icon" style="--clr:#ec4899"><i class="fa-solid fa-helicopter"></i></div>
+          <div class="rc-label">Objective 5</div>
+          <h3>Robotics &amp; UAV Systems</h3>
+          <p>Robotics platforms and UAV systems for autonomous infrastructure monitoring, field deployment, and AI model validation under real-world conditions.</p>
+          <ul class="tag-list"><li>UR5e Arm</li><li>DJI Matrice 30T</li><li>PX4 UAV</li></ul>
+        </div>
+
+        <div class="research-card reveal">
+          <div class="rc-icon" style="--clr:#8b5cf6"><i class="fa-solid fa-graduation-cap"></i></div>
+          <div class="rc-label">Objective 6</div>
+          <h3>STEM Education</h3>
+          <p>Next-generation courses in AI Engineering, CPS, Digital Twin Modeling, Smart Infrastructure, Simulation &amp; XR, and Cybersecurity for Critical Infrastructure.</p>
+          <ul class="tag-list"><li>AI Engineering</li><li>XR Systems</li><li>Cybersecurity</li></ul>
+        </div>
+
+        <div class="research-card reveal">
+          <div class="rc-icon" style="--clr:#14b8a6"><i class="fa-solid fa-sliders"></i></div>
+          <div class="rc-label">Objective 7</div>
+          <h3>AI Resource Management</h3>
+          <p>Custom AI-driven operating and resource management system developed at UND, enabling 24/7 access, multi-user scheduling, and optimized utilization of high-value equipment.</p>
+          <ul class="tag-list"><li>24/7 Operation</li><li>Multi-User</li><li>Scheduling</li></ul>
+        </div>
+
+        <div class="research-card reveal">
+          <div class="rc-icon" style="--clr:#f97316"><i class="fa-solid fa-award"></i></div>
+          <div class="rc-label">Objective 8</div>
+          <h3>External Funding &amp; Competitiveness</h3>
+          <p>Directly supporting 5 NSF proposals (2 already submitted), enabling future proposals to NSF, DoD, and DoE, and expanding interdisciplinary research collaborations.</p>
+          <ul class="tag-list"><li>NSF</li><li>DoD</li><li>DoE</li></ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== UND CONTRIBUTION ===== -->
+  <section class="section und-contribution" id="und-contribution">
+    <div class="container">
+      <div class="section-tag">University Backing</div>
+      <h2 class="section-title grad">What University of North Dakota Contributes</h2>
+      <p class="section-sub">Smart World Lab is enabled by UND through dedicated physical space, shared infrastructure, faculty expertise, operations support, and long-term institutional commitment.</p>
+
+      <div class="undc-kpis reveal">
+        <div class="undc-kpi"><strong>5+</strong><span>Departments actively integrated</span></div>
+        <div class="undc-kpi"><strong>20-30</strong><span>Students trained at once</span></div>
+        <div class="undc-kpi"><strong>4</strong><span>Centers under one research ecosystem</span></div>
+        <div class="undc-kpi"><strong>24/7</strong><span>Lab operations and data pipelines</span></div>
+      </div>
+
+      <div class="undc-grid">
+        <article class="undc-card reveal" style="--uclr:#6366f1">
+          <div class="undc-head"><i class="fa-solid fa-warehouse"></i><h3>Physical Space and Facilities</h3></div>
+          <p>UND provides dedicated lab zones for compute, robotics, sensing, and digital fabrication, plus shared classrooms for project-based learning and interdisciplinary capstones.</p>
+          <ul>
+            <li>Research testbeds for CPS and digital twins</li>
+            <li>Hands-on teaching space for workforce training</li>
+            <li>Integrated lab layout across multiple workflows</li>
+          </ul>
+        </article>
+
+        <article class="undc-card reveal" style="--uclr:#06b6d4">
+          <div class="undc-head"><i class="fa-solid fa-microchip"></i><h3>Equipment and Technical Assets</h3></div>
+          <p>UND supports acquisition and integration of advanced assets across GPUs, robotics, UAV systems, XR, and sensing platforms used in both research and instruction.</p>
+          <ul>
+            <li>HPC-grade AI compute and edge AI hardware</li>
+            <li>Robotics, UAV, and autonomy toolchains</li>
+            <li>3D printing, PCB, and prototyping systems</li>
+          </ul>
+        </article>
+
+        <article class="undc-card reveal" style="--uclr:#10b981">
+          <div class="undc-head"><i class="fa-solid fa-users-gear"></i><h3>People and Academic Strength</h3></div>
+          <p>UND contributes faculty leadership, research mentoring, graduate and undergraduate talent, and cross-department collaboration to accelerate project outcomes.</p>
+          <ul>
+            <li>Faculty from civil, mechanical, EE, CS, and aerospace</li>
+            <li>Graduate researchers and student project cohorts</li>
+            <li>Curriculum integration with real systems</li>
+          </ul>
+        </article>
+
+        <article class="undc-card reveal" style="--uclr:#f59e0b">
+          <div class="undc-head"><i class="fa-solid fa-handshake-angle"></i><h3>Funding, Operations, and Partnerships</h3></div>
+          <p>UND provides grant development support, operational structure, and external partnership channels with agencies and industry to scale Smart World impact.</p>
+          <ul>
+            <li>Proposal and compliance support for federal funding</li>
+            <li>Operational support for secure lab management</li>
+            <li>Industry and government engagement pathways</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="undc-support reveal">
+        <div class="undc-support-block" style="--uclr:#8b5cf6">
+          <h4><i class="fa-solid fa-building-columns"></i> Institutional Commitments</h4>
+          <p>Cross-college coordination, long-term strategy alignment, and shared governance structures that keep the lab sustainable beyond one funding cycle.</p>
+        </div>
+        <div class="undc-support-block" style="--uclr:#ec4899">
+          <h4><i class="fa-solid fa-earth-americas"></i> Regional and National Impact</h4>
+          <p>UND positions Smart World Lab as a platform for North Dakota innovation while contributing to national priorities in resilient infrastructure, autonomy, and intelligent systems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INFRASTRUCTURE ===== -->
+  <section class="section infrastructure" id="infrastructure">
+    <div class="container">
+      <div class="section-tag">Proposed Infrastructure</div>
+      <h2 class="section-title">Lab Infrastructure Design</h2>
+      <p class="section-sub">A fully integrated cyber-physical ecosystem with six tightly coupled layers ensuring seamless data flow and iterative system development.</p>
+
+      <div class="infra-grid">
+
+        <div class="infra-card reveal" style="--clr:#6366f1">
+          <div class="infra-header" style="--clr:#6366f1">
+            <i class="fa-solid fa-satellite-dish"></i>
+            <span>Layer 1 &mdash; Sensing</span>
+          </div>
+          <p>Multi-modal sensing technologies providing the data foundation for all CPS and AI operations. Supports infrastructure health monitoring, AI perception, and UAV-based mapping.</p>
+          <div class="infra-items">
+            <div class="ii"><i class="fa-solid fa-check"></i> LiDAR &mdash; High-resolution 3D mapping</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> Hyperspectral Imaging &mdash; Material &amp; environmental analysis</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> Thermal Cameras &mdash; Infrastructure diagnostics</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> Depth &amp; Vision &mdash; Robotics perception</div>
+          </div>
+          <div class="infra-departments">Civil &middot; CS &middot; Aerospace &middot; Environmental</div>
+        </div>
+
+        <div class="infra-card reveal" style="--clr:#06b6d4">
+          <div class="infra-header" style="--clr:#06b6d4">
+            <i class="fa-solid fa-server"></i>
+            <span>Layer 2 &mdash; AI Supercomputing</span>
+          </div>
+          <p>Central intelligence powered by NVIDIA H100 and A100 GPU systems for large-scale AI training, digital twin simulations, and multi-user research workloads without cloud dependency.</p>
+          <div class="infra-items">
+            <div class="ii"><i class="fa-solid fa-check"></i> 2&times; NVIDIA H100 &mdash; Digital twin modeling</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> 2&times; NVIDIA A100 &mdash; Distributed AI workloads</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> Threadripper Workstation &mdash; Central compute</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> 10Gb Network + Storage &mdash; Data integration</div>
+          </div>
+          <div class="infra-departments">CS &middot; Civil &middot; Mechanical &middot; Aerospace</div>
+        </div>
+
+        <div class="infra-card reveal" style="--clr:#10b981">
+          <div class="infra-header" style="--clr:#10b981">
+            <i class="fa-solid fa-cube"></i>
+            <span>Layer 3 &mdash; Simulation &amp; Digital Twin</span>
+          </div>
+          <p>High-fidelity digital twin platforms and XR environments for testing, optimizing, and validating systems before physical deployment, reducing risk and cost significantly.</p>
+          <div class="infra-items">
+            <div class="ii"><i class="fa-solid fa-check"></i> Physics-based simulation environments</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> 10&times; Meta Quest 3 &mdash; XR visualization</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> AI-driven predictive modeling</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> Smart city &amp; urban infrastructure twins</div>
+          </div>
+          <div class="infra-departments">Civil &middot; CS &middot; Aerospace &middot; Mechanical</div>
+        </div>
+
+        <div class="infra-card reveal" style="--clr:#f59e0b">
+          <div class="infra-header" style="--clr:#f59e0b">
+            <i class="fa-solid fa-industry"></i>
+            <span>Layer 4 &mdash; Fabrication</span>
+          </div>
+          <p>Industrial-scale digital fabrication enabling rapid design-to-deployment workflows. Transitions digital designs into validated physical systems for real-world testing.</p>
+          <div class="infra-items">
+            <div class="ii"><i class="fa-solid fa-check"></i> Builder Extreme 2000 PRO ($40K) &mdash; Full-scale 3D printing</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> Bantam PCB Milling Machine</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> Voltera V-One &mdash; Additive PCB printing</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> CNC &amp; laser cutting systems</div>
+          </div>
+          <div class="infra-departments">Mechanical &middot; EE &middot; Civil &middot; CS</div>
+        </div>
+
+        <div class="infra-card reveal" style="--clr:#ec4899">
+          <div class="infra-header" style="--clr:#ec4899">
+            <i class="fa-solid fa-rocket"></i>
+            <span>Layer 5 &mdash; Deployment</span>
+          </div>
+          <p>Robotics and UAV systems enabling real-world implementation and validation of AI models and CPS designs under operational conditions, bridging simulation and application.</p>
+          <div class="infra-items">
+            <div class="ii"><i class="fa-solid fa-check"></i> UR5e Robotic Arm &mdash; Industrial automation</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> 4&times; TurtleBot 4 &mdash; Mobile robotics platforms</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> DJI Matrice 30T &mdash; Infrastructure monitoring UAV</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> 3&times; PX4 Drone Kits &mdash; UAV autonomy development</div>
+          </div>
+          <div class="infra-departments">Aerospace &middot; Mechanical &middot; CS &middot; Civil</div>
+        </div>
+
+        <div class="infra-card reveal" style="--clr:#8b5cf6">
+          <div class="infra-header" style="--clr:#8b5cf6">
+            <i class="fa-solid fa-wave-square"></i>
+            <span>Layer 6 &mdash; Monitoring &amp; Feedback</span>
+          </div>
+          <p>Continuous system observation completing the CPS loop through edge AI, IoT sensing, and analytics platforms enabling adaptive systems that learn and evolve in real time.</p>
+          <div class="infra-items">
+            <div class="ii"><i class="fa-solid fa-check"></i> 15&times; Jetson Nano &mdash; Edge AI processing</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> 15&times; Raspberry Pi &mdash; IoT &amp; CPS training</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> Distributed IoT sensing networks</div>
+            <div class="ii"><i class="fa-solid fa-check"></i> Data logging &amp; analytics platforms</div>
+          </div>
+          <div class="infra-departments">CS &middot; EE &middot; Civil &middot; All Departments</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EQUIPMENT & BUDGET ===== -->
+  <section class="section equipment" id="equipment">
+    <div class="container">
+      <div class="section-tag">Equipment &amp; Budget</div>
+      <h2 class="section-title">Detailed Equipment Inventory</h2>
+      <p class="section-sub">Total requested budget: approximately <strong>$300,000</strong>, structured with prioritized implementation tiers.</p>
+
+      <div class="budget-summary reveal">
+        <div class="bs-item">
+          <div class="bs-icon" style="--clr:#6366f1"><i class="fa-solid fa-server"></i></div>
+          <div class="bs-info"><strong>AI Supercomputing</strong><span>$100,000</span></div>
+        </div>
+        <div class="bs-item">
+          <div class="bs-icon" style="--clr:#06b6d4"><i class="fa-solid fa-satellite-dish"></i></div>
+          <div class="bs-info"><strong>Advanced Sensing</strong><span>$51,200</span></div>
+        </div>
+        <div class="bs-item">
+          <div class="bs-icon" style="--clr:#f59e0b"><i class="fa-solid fa-print"></i></div>
+          <div class="bs-info"><strong>Digital Fabrication</strong><span>$49,099</span></div>
+        </div>
+        <div class="bs-item">
+          <div class="bs-icon" style="--clr:#ec4899"><i class="fa-solid fa-robot"></i></div>
+          <div class="bs-info"><strong>Robotics &amp; UAV</strong><span>$58,000</span></div>
+        </div>
+        <div class="bs-item">
+          <div class="bs-icon" style="--clr:#10b981"><i class="fa-solid fa-cube"></i></div>
+          <div class="bs-info"><strong>Simulation &amp; XR</strong><span>$5,000</span></div>
+        </div>
+        <div class="bs-item">
+          <div class="bs-icon" style="--clr:#8b5cf6"><i class="fa-solid fa-microchip"></i></div>
+          <div class="bs-info"><strong>Classroom &amp; Edge AI</strong><span>$3,750</span></div>
+        </div>
+        <div class="bs-item">
+          <div class="bs-icon" style="--clr:#14b8a6"><i class="fa-solid fa-network-wired"></i></div>
+          <div class="bs-info"><strong>Infrastructure</strong><span>$7,951</span></div>
+        </div>
+      </div>
+
+      <div class="table-wrapper reveal">
+        <table class="equipment-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Equipment</th>
+              <th>Qty</th>
+              <th>Unit Price</th>
+              <th>Total Cost</th>
+              <th>Role in Smart World Lab</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="cat-row"><td colspan="6">AI Supercomputing</td></tr>
+            <tr>
+              <td></td><td>NVIDIA H100 GPU</td><td>2</td><td>$30,000</td>
+              <td class="cost">$60,000</td><td>Large-scale AI, digital twin modeling</td>
+            </tr>
+            <tr>
+              <td></td><td>NVIDIA A100 GPU</td><td>2</td><td>$12,000</td>
+              <td class="cost">$24,000</td><td>Distributed AI workloads</td>
+            </tr>
+            <tr>
+              <td></td><td>Threadripper Multi-GPU Workstation</td><td>1</td><td>$16,000</td>
+              <td class="cost">$16,000</td><td>Central compute system</td>
+            </tr>
+            <tr class="cat-row"><td colspan="6">Advanced Sensing</td></tr>
+            <tr>
+              <td></td><td>Ouster OS1 LiDAR</td><td>1</td><td>$10,000</td>
+              <td class="cost">$10,000</td><td>3D mapping and smart infrastructure sensing</td>
+            </tr>
+            <tr>
+              <td></td><td>Hyperspectral Camera</td><td>1</td><td>$35,000</td>
+              <td class="cost">$35,000</td><td>Material and environmental analysis</td>
+            </tr>
+            <tr>
+              <td></td><td>FLIR Thermal Cameras</td><td>2</td><td>$2,500</td>
+              <td class="cost">$5,000</td><td>Infrastructure diagnostics</td>
+            </tr>
+            <tr>
+              <td></td><td>Intel RealSense Cameras</td><td>6</td><td>$200</td>
+              <td class="cost">$1,200</td><td>Depth perception and AI vision</td>
+            </tr>
+            <tr class="cat-row"><td colspan="6">Digital Fabrication</td></tr>
+            <tr>
+              <td></td><td>Builder Extreme 2000 PRO (Large 3D Printer)</td><td>1</td><td>$40,000</td>
+              <td class="cost">$40,000</td><td>Full-scale CPS prototyping</td>
+            </tr>
+            <tr>
+              <td></td><td>Bantam PCB Milling Machine</td><td>1</td><td>$4,999</td>
+              <td class="cost">$4,999</td><td>Subtractive PCB fabrication</td>
+            </tr>
+            <tr>
+              <td></td><td>Voltera V-One Digital PCB Printer</td><td>1</td><td>$3,500</td>
+              <td class="cost">$3,500</td><td>Additive PCB prototyping</td>
+            </tr>
+            <tr>
+              <td></td><td>Soldering Stations</td><td>2</td><td>$300</td>
+              <td class="cost">$600</td><td>Electronics assembly</td>
+            </tr>
+            <tr class="cat-row"><td colspan="6">Robotics Systems</td></tr>
+            <tr>
+              <td></td><td>UR5e Robotic Arm</td><td>1</td><td>$35,000</td>
+              <td class="cost">$35,000</td><td>Industrial automation and robotics research</td>
+            </tr>
+            <tr>
+              <td></td><td>TurtleBot 4</td><td>4</td><td>$2,000</td>
+              <td class="cost">$8,000</td><td>Mobile robotics and CPS experimentation</td>
+            </tr>
+            <tr class="cat-row"><td colspan="6">UAV Systems</td></tr>
+            <tr>
+              <td></td><td>DJI Matrice 30T</td><td>1</td><td>$12,000</td>
+              <td class="cost">$12,000</td><td>Smart infrastructure monitoring</td>
+            </tr>
+            <tr>
+              <td></td><td>PX4 Drone Kits</td><td>3</td><td>$1,000</td>
+              <td class="cost">$3,000</td><td>UAV autonomy development</td>
+            </tr>
+            <tr class="cat-row"><td colspan="6">Simulation &amp; XR</td></tr>
+            <tr>
+              <td></td><td>Meta Quest 3</td><td>10</td><td>$500</td>
+              <td class="cost">$5,000</td><td>Digital twin visualization and XR education</td>
+            </tr>
+            <tr class="cat-row"><td colspan="6">Classroom &amp; Edge AI</td></tr>
+            <tr>
+              <td></td><td>Jetson Nano Kits</td><td>15</td><td>$150</td>
+              <td class="cost">$2,250</td><td>Edge AI systems and student training</td>
+            </tr>
+            <tr>
+              <td></td><td>Raspberry Pi Kits</td><td>15</td><td>$100</td>
+              <td class="cost">$1,500</td><td>IoT and CPS training platforms</td>
+            </tr>
+            <tr class="cat-row"><td colspan="6">Infrastructure</td></tr>
+            <tr>
+              <td></td><td>10Gb Network + Storage</td><td>1</td><td>$7,951</td>
+              <td class="cost">$7,951</td><td>Data integration and system connectivity</td>
+            </tr>
+            <tr class="total-row">
+              <td colspan="4"><strong>Total Budget</strong></td>
+              <td colspan="2" class="cost total-cost"><strong>~$300,000</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MOTIVATION ===== -->
+  <section class="section motivation" id="motivation">
+    <div class="container">
+      <div class="section-tag">Why This Matters</div>
+      <h2 class="section-title">Motivation &amp; Need</h2>
+      <div class="motivation-grid">
+        <div class="motivation-content reveal">
+          <p class="lead">
+            The rapid advancement of AI, cyber-physical systems, digital twins, and smart infrastructure
+            technologies has fundamentally transformed engineering research. These domains are now central to
+            national priorities in intelligent transportation, resilient infrastructure, autonomous systems, and defense.
+          </p>
+          <p>
+            At UND, existing infrastructure remains <strong>fragmented and insufficient</strong>. Resources are distributed
+            across departments, lacking integration between sensing systems, computing platforms, simulation tools, and
+            fabrication capabilities. This fragmentation limits end-to-end CPS research and constrains the scope and
+            competitiveness of externally funded proposals.
+          </p>
+          <p>
+            Without this investment, UND risks falling behind in rapidly evolving fields central to the future
+            of engineering and technology. With it, the university is positioned to become a leader in smart
+            infrastructure, AI engineering, and integrated CPS research.
+          </p>
+        </div>
+        <div class="motivation-needs reveal">
+          <div class="need-item">
+            <div class="ni-icon" style="--clr:#6366f1"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div>
+              <strong>Fragmented Infrastructure</strong>
+              <p>No unified integration between sensing, computing, simulation, and fabrication across departments.</p>
+            </div>
+          </div>
+          <div class="need-item">
+            <div class="ni-icon" style="--clr:#06b6d4"><i class="fa-solid fa-bolt"></i></div>
+            <div>
+              <strong>Active NSF Proposals</strong>
+              <p>5 NSF proposals in development (2 already submitted) requiring currently unavailable integrated capabilities.</p>
+            </div>
+          </div>
+          <div class="need-item">
+            <div class="ni-icon" style="--clr:#10b981"><i class="fa-solid fa-book-open"></i></div>
+            <div>
+              <strong>New Curriculum Demand</strong>
+              <p>Next-gen interdisciplinary courses require hands-on system-level lab environments not currently available.</p>
+            </div>
+          </div>
+          <div class="need-item">
+            <div class="ni-icon" style="--clr:#f59e0b"><i class="fa-solid fa-industry"></i></div>
+            <div>
+              <strong>Industry &amp; Government Alignment</strong>
+              <p>Digital twins and AI-driven monitoring now essential across industry and government sectors nationwide.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BROADER IMPACT ===== -->
+  <section class="section impact" id="impact">
+    <div class="container">
+      <div class="section-tag">Broader Impact</div>
+      <h2 class="section-title">Educational Impact &amp; Multidisciplinary Integration</h2>
+      <p class="section-sub">The Smart World Lab delivers significant broader impacts across research, education, and society.</p>
+
+      <div class="impact-grid">
+        <div class="impact-card reveal">
+          <i class="fa-solid fa-flask" style="color:#6366f1"></i>
+          <h3>Advanced Research</h3>
+          <p>AI-driven digital twin systems, smart infrastructure monitoring, autonomous robotics, and multi-modal sensing and data fusion at research-grade scale.</p>
+        </div>
+        <div class="impact-card reveal">
+          <i class="fa-solid fa-chalkboard-user" style="color:#06b6d4"></i>
+          <h3>Hands-On Education</h3>
+          <p>20&ndash;30 students simultaneously gaining practical experience in AI, CPS, robotics, and smart cities using both research-grade and classroom-scale equipment.</p>
+        </div>
+        <div class="impact-card reveal">
+          <i class="fa-solid fa-briefcase" style="color:#10b981"></i>
+          <h3>Workforce Development</h3>
+          <p>Preparing graduates aligned with national STEM priorities for careers in smart infrastructure, autonomous systems, AI engineering, and advanced manufacturing.</p>
+        </div>
+        <div class="impact-card reveal">
+          <i class="fa-solid fa-handshake" style="color:#f59e0b"></i>
+          <h3>Industry Partnerships</h3>
+          <p>Platform for applied research and technology development, strengthening partnerships with industry, government, and academic institutions worldwide.</p>
+        </div>
+        <div class="impact-card reveal">
+          <i class="fa-solid fa-trophy" style="color:#ec4899"></i>
+          <h3>Funding Competitiveness</h3>
+          <p>Directly enabling 5 current NSF proposals and significantly enhancing capacity to secure future funding from NSF, DoD, DoE, and industry partners.</p>
+        </div>
+        <div class="impact-card reveal">
+          <i class="fa-solid fa-earth-americas" style="color:#8b5cf6"></i>
+          <h3>Societal Challenges</h3>
+          <p>Research addressing sustainable urban development, disaster resilience, energy efficiency, and intelligent transportation systems.</p>
+        </div>
+      </div>
+
+      <div class="departments reveal">
+        <h3>Departments Served</h3>
+        <div class="dept-list">
+          <div class="dept-item">
+            <i class="fa-solid fa-building" style="color:#6366f1"></i>
+            <span>Civil Engineering</span>
+            <small>Smart infrastructure, digital twins, monitoring</small>
+          </div>
+          <div class="dept-item">
+            <i class="fa-solid fa-gears" style="color:#06b6d4"></i>
+            <span>Mechanical Engineering</span>
+            <small>Robotics, fabrication, mechatronics</small>
+          </div>
+          <div class="dept-item">
+            <i class="fa-solid fa-bolt" style="color:#10b981"></i>
+            <span>Electrical Engineering</span>
+            <small>Embedded systems, PCB, sensing</small>
+          </div>
+          <div class="dept-item">
+            <i class="fa-solid fa-laptop-code" style="color:#f59e0b"></i>
+            <span>Computer Science</span>
+            <small>AI engineering, simulation, digital twins</small>
+          </div>
+          <div class="dept-item">
+            <i class="fa-solid fa-plane" style="color:#ec4899"></i>
+            <span>Aerospace Engineering</span>
+            <small>UAV systems, autonomous control, flight</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CENTERS ===== -->
+  <section class="section centers" id="centers">
+    <div class="container">
+      <div class="section-tag">Research Centers</div>
+      <h2 class="section-title grad">Smart World Research Centers</h2>
+      <p class="section-sub">Dedicated research centers advancing AI, cyber-physical systems, digital twins, and smart infrastructure.</p>
+
+      <div class="centers-grid">
+
+        <!-- AIT Center -->
+        <a href="centers/ait-center/" class="center-card reveal" style="--clr:#6366f1">
+          <div class="center-card-icon"><i class="fa-solid fa-brain"></i></div>
+          <div class="center-card-body">
+            <div class="center-card-tag">AI &amp; Intelligent Technology</div>
+            <h3>AIT Center</h3>
+            <p>AI-driven research hub integrating machine learning, computer vision, and intelligent systems with supercomputing infrastructure for real-world CPS applications.</p>
+            <ul class="center-card-tags">
+              <li>Machine Learning</li>
+              <li>Computer Vision</li>
+              <li>HPC / GPU Cluster</li>
+              <li>Edge AI</li>
+            </ul>
+          </div>
+          <div class="center-card-footer">
+            <span>Explore Center <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- CPS Center -->
+        <a href="centers/cps-center/" class="center-card reveal" style="--clr:#06b6d4">
+          <div class="center-card-icon"><i class="fa-solid fa-microchip"></i></div>
+          <div class="center-card-body">
+            <div class="center-card-tag">Cyber-Physical Systems</div>
+            <h3>CPS Center</h3>
+            <p>Bridging the physical and digital worlds through embedded systems, real-time sensing, wireless networking, and autonomous control for smart environments.</p>
+            <ul class="center-card-tags">
+              <li>Embedded Systems</li>
+              <li>IoT &amp; Sensing</li>
+              <li>Wireless Networks</li>
+              <li>Autonomous Control</li>
+            </ul>
+          </div>
+          <div class="center-card-footer">
+            <span>Explore Center <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- Digital Twin Center -->
+        <a href="centers/dt-center/" class="center-card reveal" style="--clr:#10b981">
+          <div class="center-card-icon"><i class="fa-solid fa-cube"></i></div>
+          <div class="center-card-body">
+            <div class="center-card-tag">Simulation &amp; Modeling</div>
+            <h3>Digital Twin Center</h3>
+            <p>Creating high-fidelity virtual replicas of physical systems to enable predictive maintenance, scenario planning, and real-time decision support at scale.</p>
+            <ul class="center-card-tags">
+              <li>3D Simulation</li>
+              <li>Real-Time Sync</li>
+              <li>Predictive Analytics</li>
+              <li>Smart Cities</li>
+            </ul>
+          </div>
+          <div class="center-card-footer">
+            <span>Explore Center <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- Robotics & UAV Center -->
+        <a href="centers/robotics-center/" class="center-card reveal" style="--clr:#f59e0b">
+          <div class="center-card-icon"><i class="fa-solid fa-robot"></i></div>
+          <div class="center-card-body">
+            <div class="center-card-tag">Autonomous Systems</div>
+            <h3>Robotics &amp; UAV Center</h3>
+            <p>Advancing autonomous ground and aerial platforms through intelligent navigation, multi-robot coordination, and UAV-based sensing for infrastructure inspection.</p>
+            <ul class="center-card-tags">
+              <li>Autonomous Robots</li>
+              <li>UAV / Drones</li>
+              <li>SLAM Navigation</li>
+              <li>Multi-Agent Systems</li>
+            </ul>
+          </div>
+          <div class="center-card-footer">
+            <span>Explore Center <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TEAM ===== -->
+  <section class="section team" id="team">
+    <div class="container">
+      <div class="section-tag">Team Hub</div>
+      <h2 class="section-title">People Profile Hub</h2>
+      <p class="section-sub">Meet the people building Smart World Lab across faculty leadership, research execution, student innovation, and operations.</p>
+
+      <div class="team-toolbar reveal">
+        <div class="team-filters" role="tablist" aria-label="Team role filters">
+          <button type="button" class="team-filter team-filter--active" data-role="all">All</button>
+          <button type="button" class="team-filter" data-role="faculty">Faculty</button>
+          <button type="button" class="team-filter" data-role="researcher">Researchers</button>
+          <button type="button" class="team-filter" data-role="student">Students</button>
+          <button type="button" class="team-filter" data-role="operations">Operations</button>
+        </div>
+        <label class="team-search-wrap" for="teamSearch">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <input id="teamSearch" type="search" placeholder="Search by role, department, focus..." aria-label="Search team profiles">
+        </label>
+      </div>
+
+      <div class="team-grid">
+
+        <article class="team-card reveal" style="--clr:#6366f1" data-role="faculty" data-keywords="director leadership cps ai grants">
+          <div class="team-avatar" style="--clr:#6366f1"><span>PI</span></div>
+          <div class="team-info">
+            <div class="team-topline"><h3>Principal Investigator</h3><span class="team-badge">Faculty</span></div>
+            <span class="team-role">Lab Director and Lead Researcher</span>
+            <p>Shapes strategy, secures partnerships, and aligns all center activities with UND's long-term research and workforce mission.</p>
+            <div class="team-focus"><span>AI Engineering</span><span>CPS Strategy</span><span>Proposal Leadership</span></div>
+            <div class="team-social">
+              <a href="#" aria-label="Google Scholar"><i class="fa-solid fa-graduation-cap"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="#" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card reveal" style="--clr:#06b6d4" data-role="faculty" data-keywords="civil infrastructure digital twin sensors">
+          <div class="team-avatar" style="--clr:#06b6d4"><span>CE</span></div>
+          <div class="team-info">
+            <div class="team-topline"><h3>Civil Engineering Faculty</h3><span class="team-badge">Faculty</span></div>
+            <span class="team-role">Smart Infrastructure and Digital Twins</span>
+            <p>Leads structural sensing, infrastructure lifecycle analytics, and digital twin validation for resilient smart city systems.</p>
+            <div class="team-focus"><span>Structural Health</span><span>Digital Twin Models</span><span>Urban Analytics</span></div>
+            <div class="team-social">
+              <a href="#" aria-label="Google Scholar"><i class="fa-solid fa-graduation-cap"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="#" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card reveal" style="--clr:#10b981" data-role="faculty" data-keywords="computer science machine learning simulation platform">
+          <div class="team-avatar" style="--clr:#10b981"><span>CS</span></div>
+          <div class="team-info">
+            <div class="team-topline"><h3>Computer Science Faculty</h3><span class="team-badge">Faculty</span></div>
+            <span class="team-role">AI Engineering and Simulation</span>
+            <p>Builds scalable AI pipelines and simulation frameworks powering the Smart World platform and real-time model updates.</p>
+            <div class="team-focus"><span>Machine Learning</span><span>Model Ops</span><span>Platform AI</span></div>
+            <div class="team-social">
+              <a href="#" aria-label="Google Scholar"><i class="fa-solid fa-graduation-cap"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="#" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card reveal" style="--clr:#f59e0b" data-role="faculty" data-keywords="aerospace uav autonomy flight inspection">
+          <div class="team-avatar" style="--clr:#f59e0b"><span>AE</span></div>
+          <div class="team-info">
+            <div class="team-topline"><h3>Aerospace Engineering Faculty</h3><span class="team-badge">Faculty</span></div>
+            <span class="team-role">UAV Systems and Autonomy</span>
+            <p>Oversees UAV research, autonomous flight experiments, and aerial sensing deployments for inspection and environmental monitoring.</p>
+            <div class="team-focus"><span>Autonomous UAV</span><span>Aerial Sensing</span><span>Mission Planning</span></div>
+            <div class="team-social">
+              <a href="#" aria-label="Google Scholar"><i class="fa-solid fa-graduation-cap"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="#" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card reveal" style="--clr:#ec4899" data-role="researcher" data-keywords="robotics fabrication ur5 additive">
+          <div class="team-avatar" style="--clr:#ec4899"><span>ME</span></div>
+          <div class="team-info">
+            <div class="team-topline"><h3>Mechanical Research Lead</h3><span class="team-badge">Researcher</span></div>
+            <span class="team-role">Robotics and Fabrication Systems</span>
+            <p>Coordinates robotic fabrication workflows and rapid prototyping studies across digital design, manufacturing, and testing.</p>
+            <div class="team-focus"><span>Industrial Robotics</span><span>Digital Fabrication</span><span>Mechatronics</span></div>
+            <div class="team-social">
+              <a href="#" aria-label="Google Scholar"><i class="fa-solid fa-graduation-cap"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="#" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card reveal" style="--clr:#8b5cf6" data-role="researcher" data-keywords="electrical embedded iot sensing cybersecurity">
+          <div class="team-avatar" style="--clr:#8b5cf6"><span>EE</span></div>
+          <div class="team-info">
+            <div class="team-topline"><h3>Electrical Research Lead</h3><span class="team-badge">Researcher</span></div>
+            <span class="team-role">Embedded Systems and Sensing</span>
+            <p>Drives edge devices, sensing electronics, and secure communication architectures for connected CPS deployments.</p>
+            <div class="team-focus"><span>Embedded Design</span><span>Sensor Fusion</span><span>CPS Security</span></div>
+            <div class="team-social">
+              <a href="#" aria-label="Google Scholar"><i class="fa-solid fa-graduation-cap"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="#" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card reveal" style="--clr:#14b8a6" data-role="student" data-keywords="graduate student ai digital twin data">
+          <div class="team-avatar" style="--clr:#14b8a6"><span>GS</span></div>
+          <div class="team-info">
+            <div class="team-topline"><h3>Graduate Research Fellow</h3><span class="team-badge">Student</span></div>
+            <span class="team-role">AI and Digital Twin Research</span>
+            <p>Builds experiments, handles model validation, and supports publication output across smart infrastructure and twin analytics projects.</p>
+            <div class="team-focus"><span>Experiment Design</span><span>Data Pipelines</span><span>Publications</span></div>
+            <div class="team-social">
+              <a href="#" aria-label="Google Scholar"><i class="fa-solid fa-graduation-cap"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="#" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="team-card reveal" style="--clr:#22c55e" data-role="operations" data-keywords="operations lab manager scheduling safety partnerships">
+          <div class="team-avatar" style="--clr:#22c55e"><span>LM</span></div>
+          <div class="team-info">
+            <div class="team-topline"><h3>Lab Operations Manager</h3><span class="team-badge">Operations</span></div>
+            <span class="team-role">Facility, Safety, and Program Operations</span>
+            <p>Manages lab utilization, onboarding, safety compliance, and day-to-day coordination across teams, courses, and partners.</p>
+            <div class="team-focus"><span>Lab Scheduling</span><span>Safety Protocols</span><span>Program Support</span></div>
+            <div class="team-social">
+              <a href="#" aria-label="Google Scholar"><i class="fa-solid fa-graduation-cap"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="#" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <p class="team-empty" id="teamEmpty" hidden>No profiles match your current filters. Try another role or clear the search.</p>
+    </div>
+  </section>
+
+  <!-- ===== MEDIA GALLERY ===== -->
+  <section class="section media-gallery" id="gallery">
+    <div class="container">
+      <div class="section-tag">Content Hub</div>
+      <h2 class="section-title">Photos &amp; Videos Gallery</h2>
+      <p class="section-sub">This gallery automatically loads images and videos from the <strong>content</strong> folder using the media manifest file.</p>
+
+      <div class="gallery-toolbar reveal">
+        <button type="button" class="g-filter active" data-filter="all">All</button>
+        <button type="button" class="g-filter" data-filter="image">Images</button>
+        <button type="button" class="g-filter" data-filter="video">Videos</button>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid"></div>
+      <div class="gallery-empty" id="galleryEmpty">No media found yet. Put files in <strong>content</strong> and list them in <strong>content/media.json</strong>.</div>
+    </div>
+  </section>
+
+  <!-- ===== TREE CHAT ===== -->
+  <section class="section tree-chat" id="tree-chat">
+    <div class="container">
+      <div class="section-tag">Interactive Assistant</div>
+      <h2 class="section-title">Root &amp; Branch Chat</h2>
+      <p class="section-sub">Start from a root topic, then grow the conversation through branch questions about Smart World Lab, centers, and collaboration.</p>
+
+      <div class="tree-chat-grid">
+        <aside class="tree-panel reveal">
+          <h3><i class="fa-solid fa-seedling"></i> Root Topics</h3>
+          <div class="tree-root-node">Smart World Lab</div>
+          <div class="tree-branches" id="treeBranches">
+            <button type="button" class="tree-branch" data-msg="Tell me about Smart World Lab.">About the Lab</button>
+            <button type="button" class="tree-branch" data-msg="What are your major research areas?">Research Areas</button>
+            <button type="button" class="tree-branch" data-msg="How can I collaborate with your team?">Collaboration</button>
+            <button type="button" class="tree-branch" data-msg="What facilities and infrastructure are available?">Infrastructure</button>
+            <button type="button" class="tree-branch" data-msg="Tell me about AIT center and other centers.">Centers</button>
+          </div>
+        </aside>
+
+        <div class="tree-chat-shell reveal">
+          <div class="tree-chat-head">
+            <strong><i class="fa-solid fa-tree"></i> Tree Assistant</strong>
+            <span>Online</span>
+          </div>
+          <div class="tree-chat-log" id="treeChatLog">
+            <div class="tree-msg bot">Welcome. Pick a branch on the left or ask anything about Smart World Lab.</div>
+          </div>
+          <form class="tree-chat-form" id="treeChatForm">
+            <input type="text" id="treeChatInput" placeholder="Ask your question..." autocomplete="off" />
+            <button type="submit"><i class="fa-solid fa-paper-plane"></i> Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section-tag">Get in Touch</div>
+      <h2 class="section-title">Contact Us</h2>
+      <p class="section-sub">Interested in collaboration, joining the lab, or learning more about Smart World Lab at UND?</p>
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <strong>Address</strong>
+              <span>Smart World Lab<br />University of North Dakota<br />Grand Forks, ND 58202</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div>
+              <strong>Email</strong>
+              <span>smartworldlab@und.edu</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-globe"></i></div>
+            <div>
+              <strong>Institution</strong>
+              <span>University of North Dakota<br />und.edu</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fa-solid fa-clock"></i></div>
+            <div>
+              <strong>Availability</strong>
+              <span>24/7 shared access via<br />AI resource management system</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form reveal" id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="your@email.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject">
+              <option value="">Select a topic</option>
+              <option>Research Collaboration</option>
+              <option>Join the Lab (Faculty / Student)</option>
+              <option>NSF Proposal Inquiry</option>
+              <option>Industry Partnership</option>
+              <option>Equipment / Facility Access</option>
+              <option>General Question</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" rows="5" placeholder="Write your message here..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">
+            <i class="fa-solid fa-paper-plane"></i> Send Message
+          </button>
+          <div class="form-success" id="formSuccess">
+            <i class="fa-solid fa-circle-check"></i> Your message has been sent! We'll be in touch soon.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#home" class="nav-logo">
+            <span class="logo-icon"><i class="fa-solid fa-globe"></i></span>
+            <span class="logo-text">Smart<strong>World</strong> Lab</span>
+          </a>
+          <p>Cyber-Physical Systems &middot; AI Engineering &middot; Digital Twin &middot; Smart Infrastructure</p>
+          <p class="footer-und">University of North Dakota &middot; Grand Forks, ND</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="#" aria-label="ResearchGate"><i class="fa-brands fa-researchgate"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#mission-vision">Mission &amp; Vision</a></li>
+            <li><a href="#lifecycle">CPS Lifecycle</a></li>
+            <li><a href="#smart-city-3d">3D City Model</a></li>
+            <li><a href="#research">Research Areas</a></li>
+            <li><a href="#infrastructure">Infrastructure</a></li>
+            <li><a href="#equipment">Equipment</a></li>
+            <li><a href="#tree-chat">Tree Chat</a></li>
+            <li><a href="#team">Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Research Domains</h4>
+          <ul>
+            <li><a href="#research">AI Engineering</a></li>
+            <li><a href="#research">Digital Twins</a></li>
+            <li><a href="#research">Smart Cities</a></li>
+            <li><a href="#research">Robotics &amp; UAV</a></li>
+            <li><a href="#research">Cybersecurity</a></li>
+            <li><a href="#research">Smart Infrastructure</a></li>
+          </ul>
+        </div>
+        <div class="footer-newsletter">
+          <h4>Stay Updated</h4>
+          <p>Subscribe for the latest research updates and lab news from Smart World Lab.</p>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" placeholder="your@email.com" required />
+            <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-arrow-right"></i></button>
+          </form>
+          <div class="funding-note">
+            <i class="fa-solid fa-award"></i>
+            <span>Supported by NSF, DoD &amp; DoE funding programs</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Smart World Lab &mdash; University of North Dakota. All rights reserved.</p>
+        <p>Advancing AI Engineering &amp; Cyber-Physical Systems Research.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <!-- OS launch overlay -->
+  <div class="os-overlay" id="osOverlay" aria-hidden="true">
+    <div class="os-overlay-inner">
+      <div class="os-rings">
+        <span class="os-ring r1"></span>
+        <span class="os-ring r2"></span>
+        <span class="os-ring r3"></span>
+        <div class="os-ring-logo"><i class="fa-solid fa-globe"></i></div>
+      </div>
+      <p class="os-overlay-label">Launching Smart World OS&hellip;</p>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+
+  <!-- ── Hero orbit: JS-driven spin (nodes stay upright, orbit around center) ── -->
+  <script>
+  (function () {
+    const wrap  = document.querySelector('.hero-orbit-wrap');
+    const ring  = document.getElementById('heroOrbitRing');
+    if (!wrap || !ring) return;
+
+    const nodes = Array.from(ring.querySelectorAll('.hon'));
+    const N = nodes.length;                    // 6
+    const BASE = nodes.map((_, i) => i * (360 / N)); // 0, 60, 120, 180, 240, 300 deg
+
+    let deg = 0;
+
+    function radius() {
+      /* 40% of the wrap half-size matches the SVG ring r="168" at 420px */
+      return Math.min(wrap.offsetWidth, wrap.offsetHeight) * 0.4;
+    }
+
+    function frame() {
+      deg = (deg + 0.22) % 360;   // ~13 rpm at 60 fps — smooth but readable
+      const r = radius();
+      nodes.forEach((node, i) => {
+        const a = (BASE[i] + deg) * Math.PI / 180;
+        const x = Math.sin(a) * r;
+        const y = -Math.cos(a) * r;
+        /* translate from center; hon-inner uses translate(-50%,-50%) to center itself */
+        node.style.transform = `translate(${x}px, ${y}px)`;
+      });
+      requestAnimationFrame(frame);
+    }
+
+    requestAnimationFrame(frame);
+  })();
+  </script>
+
+  <!-- ── 3D Smart City (Three.js procedural) ── -->
+  <script>
+  (function () {
+    if (typeof THREE === 'undefined') return;
+    const canvas = document.getElementById('sc3dCanvas');
+    if (!canvas) return;
+
+    /* ── Scene ── */
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x020817);
+    scene.fog = new THREE.Fog(0x020817, 45, 95);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 200);
+
+    function resize() {
+      const W = canvas.parentElement.clientWidth || 800;
+      const H = Math.min(W * 0.56, 500);
+      renderer.setSize(W, H);
+      camera.aspect = W / H;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    /* ── Lights ── */
+    scene.add(new THREE.AmbientLight(0x1a2550, 1.4));
+    const dir = new THREE.DirectionalLight(0x3050ff, 1.8);
+    dir.position.set(20, 30, 10);
+    scene.add(dir);
+    [[0x6366f1,10, 0, 6, 0],
+     [0x06b6d4, 6,14, 4, 0],
+     [0xec4899, 5,-10,3,10],
+     [0x10b981, 5, 0, 3,-14]].forEach(([c,i,x,y,z]) => {
+      const l = new THREE.PointLight(c, i, 38);
+      l.position.set(x, y, z);
+      scene.add(l);
+    });
+
+    /* ── Ground ── */
+    const gnd = new THREE.Mesh(
+      new THREE.PlaneGeometry(80, 80),
+      new THREE.MeshLambertMaterial({ color: 0x060c18 })
+    );
+    gnd.rotation.x = -Math.PI / 2;
+    scene.add(gnd);
+
+    /* ── Roads ── */
+    const roadMat = new THREE.MeshLambertMaterial({ color: 0x04080f });
+    function road(x, z, w, d) {
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), roadMat);
+      m.rotation.x = -Math.PI / 2;
+      m.position.set(x, 0.02, z);
+      scene.add(m);
+    }
+    [-12, 0, 12].forEach(p => { road(p, 0, 3.5, 80); road(0, p, 80, 3.5); });
+
+    /* road center line dashes */
+    const dashMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b, opacity: 0.25, transparent: true });
+    for (let i = -28; i <= 28; i += 6) {
+      [[i,0,0.12,2.5,0], [0,i,2.5,0.12,0]].forEach(([x,z,w,d]) => {
+        if (Math.abs(x) < 2 && Math.abs(z) < 2) return;
+        const m = new THREE.Mesh(new THREE.PlaneGeometry(w,d), dashMat);
+        m.rotation.x = -Math.PI / 2;
+        m.position.set(x, 0.03, z);
+        scene.add(m);
+      });
+    }
+
+    /* ── Window texture factory (canvas-based) ── */
+    const texCache = {};
+    function makeWinTex(hex) {
+      if (texCache[hex]) return texCache[hex];
+      const cv = document.createElement('canvas');
+      cv.width = 64; cv.height = 128;
+      const cx = cv.getContext('2d');
+      cx.fillStyle = '#050d1a';
+      cx.fillRect(0, 0, 64, 128);
+      const r = (hex >> 16) & 255, g = (hex >> 8) & 255, b = hex & 255;
+      for (let y = 6; y < 128; y += 16) {
+        for (let x = 4; x < 60; x += 12) {
+          if (Math.random() > 0.3) {
+            cx.fillStyle = `rgba(${r},${g},${b},${(0.45 + Math.random() * 0.55).toFixed(2)})`;
+            cx.fillRect(x, y, 8, 9);
+          }
+        }
+      }
+      const t = new THREE.CanvasTexture(cv);
+      t.wrapS = t.wrapT = THREE.RepeatWrapping;
+      texCache[hex] = t;
+      return t;
+    }
+
+    /* ── Buildings ── */
+    const ACCENTS = [0x6366f1, 0x06b6d4, 0x10b981, 0xec4899, 0xf59e0b, 0x8b5cf6];
+    const BASE    = [0x1a2540, 0x0d1a30, 0x162035, 0x1e2d44, 0x0a1525];
+
+    function addBuilding(x, z) {
+      const h  = 3 + Math.random() * 14;
+      const w  = 1.8 + Math.random() * 2.6;
+      const d  = 1.8 + Math.random() * 2.6;
+      const ac = ACCENTS[Math.floor(Math.random() * ACCENTS.length)];
+      const tex = makeWinTex(ac);
+      tex.repeat.set(w / 3, h / 4);
+      const mat = new THREE.MeshLambertMaterial({
+        color: BASE[Math.floor(Math.random() * BASE.length)],
+        emissive: new THREE.Color(ac),
+        emissiveIntensity: 0.06,
+        emissiveMap: tex,
+      });
+      const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+      mesh.position.set(x, h / 2, z);
+      scene.add(mesh);
+      /* rooftop detail */
+      if (Math.random() > 0.38) {
+        const rm = new THREE.Mesh(
+          new THREE.BoxGeometry(0.5, 0.35, 0.5),
+          new THREE.MeshBasicMaterial({ color: ac })
+        );
+        rm.position.set(x, h + 0.18, z);
+        scene.add(rm);
+        /* small glow above rooftop */
+        const pl = new THREE.PointLight(ac, 1.5, 6);
+        pl.position.set(x, h + 1, z);
+        scene.add(pl);
+      }
+    }
+
+    /* block grid — skip center for tower */
+    [[-16,-16],[-16,-4],[-16,8],[-4,-16],[-4,-4],[-4,8],
+     [8,-16],[8,-4],[8,8],[16,-16],[16,-4],[16,8]]
+    .forEach(([bx, bz]) => {
+      [[-2.5,-2.5],[-2.5,2.5],[2.5,-2.5],[2.5,2.5]].forEach(([ox, oz]) => {
+        addBuilding(bx + ox, bz + oz);
+      });
+    });
+    /* small plaza buildings near center */
+    [[-6,-6],[-6,6],[6,-6],[6,6]].forEach(([x,z]) => addBuilding(x, z));
+
+    /* ── Central tower (Smart World OS landmark) ── */
+    const towerMat = new THREE.MeshLambertMaterial({
+      color: 0x1a2040,
+      emissive: new THREE.Color(0x6366f1),
+      emissiveIntensity: 0.18,
+    });
+    const tower = new THREE.Mesh(new THREE.CylinderGeometry(0.32, 0.72, 24, 8), towerMat);
+    tower.position.set(0, 12, 0);
+    scene.add(tower);
+    /* tower ring midway */
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(1.4, 0.12, 8, 32),
+      new THREE.MeshBasicMaterial({ color: 0x6366f1 })
+    );
+    ring.position.set(0, 14, 0);
+    scene.add(ring);
+    /* orb top */
+    const orbMat = new THREE.MeshBasicMaterial({ color: 0x6366f1 });
+    const orb = new THREE.Mesh(new THREE.SphereGeometry(1.1, 16, 16), orbMat);
+    orb.position.set(0, 24.6, 0);
+    scene.add(orb);
+    const orbLight = new THREE.PointLight(0x6366f1, 12, 30);
+    orbLight.position.copy(orb.position);
+    scene.add(orbLight);
+
+    /* ── Street lamps ── */
+    const poleMat = new THREE.MeshLambertMaterial({ color: 0x2a3a5a });
+    const lampMat = new THREE.MeshBasicMaterial({ color: 0xfff4c0 });
+    [[-2,-15],[-2,-3],[-2,9],[2,-15],[2,-3],[2,9],
+     [-15,-2],[-3,-2],[9,-2],[-15,2],[-3,2],[9,2]]
+    .forEach(([x, z]) => {
+      const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, 3.2, 6), poleMat);
+      pole.position.set(x, 1.6, z);
+      scene.add(pole);
+      const lamp = new THREE.Mesh(new THREE.SphereGeometry(0.18, 8, 8), lampMat);
+      lamp.position.set(x, 3.3, z);
+      scene.add(lamp);
+      const pl = new THREE.PointLight(0xfff0cc, 2, 11);
+      pl.position.set(x, 3.1, z);
+      scene.add(pl);
+    });
+
+    /* ── Orbit controls (manual spherical) ── */
+    let sph = { theta: Math.PI * 0.28, phi: Math.PI * 0.3, r: 46 };
+    let drag = false, autoSpin = true;
+    let px = 0, py = 0;
+
+    function applyCamera() {
+      const sp = Math.sin(sph.phi), cp = Math.cos(sph.phi);
+      camera.position.set(sph.r * sp * Math.sin(sph.theta), sph.r * cp, sph.r * sp * Math.cos(sph.theta));
+      camera.lookAt(0, 5, 0);
+    }
+    applyCamera();
+
+    canvas.addEventListener('mousedown', e => { drag = true; autoSpin = false; px = e.clientX; py = e.clientY; });
+    canvas.addEventListener('touchstart', e => { drag = true; autoSpin = false; px = e.touches[0].clientX; py = e.touches[0].clientY; }, { passive: true });
+    window.addEventListener('mouseup',   () => drag = false);
+    window.addEventListener('touchend',  () => drag = false);
+    canvas.addEventListener('mousemove', e => {
+      if (!drag) return;
+      sph.theta -= (e.clientX - px) * 0.007;
+      sph.phi = Math.max(0.22, Math.min(1.42, sph.phi + (e.clientY - py) * 0.005));
+      px = e.clientX; py = e.clientY;
+      applyCamera();
+    });
+    canvas.addEventListener('touchmove', e => {
+      if (!drag) return;
+      e.preventDefault();
+      sph.theta -= (e.touches[0].clientX - px) * 0.007;
+      sph.phi = Math.max(0.22, Math.min(1.42, sph.phi + (e.touches[0].clientY - py) * 0.005));
+      px = e.touches[0].clientX; py = e.touches[0].clientY;
+      applyCamera();
+    }, { passive: false });
+    canvas.addEventListener('wheel', e => {
+      sph.r = Math.max(16, Math.min(78, sph.r + e.deltaY * 0.06));
+      applyCamera();
+      e.preventDefault();
+    }, { passive: false });
+
+    /* ── Render loop ── */
+    let t = 0;
+    (function loop() {
+      requestAnimationFrame(loop);
+      t += 0.012;
+      if (autoSpin) { sph.theta += 0.004; applyCamera(); }
+      /* pulse orb */
+      orbMat.color.setHSL(0.67 + Math.sin(t) * 0.04, 0.9, 0.52 + Math.sin(t * 1.3) * 0.06);
+      orbLight.intensity = 8 + Math.sin(t * 1.6) * 5;
+      ring.rotation.y += 0.008;
+      renderer.render(scene, camera);
+    })();
+  })();
+  </script>
+  <script>
+  /* ============================================================
+     STARS + METEORS â€” vibrant, colorful, performant
+     ============================================================ */
+  (function(){
+    const canvas = document.getElementById('constellationCanvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    /* Neon palette */
+    const PAL = [
+      [130,140,255], // indigo
+      [0,  220,255], // electric cyan
+      [180,100,255], // neon violet
+      [0,  255,180], // neon emerald
+      [255,200, 60], // bright amber
+      [255, 80,180], // hot pink
+      [80, 200,255], // sky blue
+      [255,255,255], // white
+    ];
+
+    let W, H, dpr;
+    /* offscreen for static dense star field â€” drawn once */
+    let offBg = null;
+    /* animated bright stars */
+    const ANIM_N = 160;
+    let aStars = [];
+    /* meteors */
+    let meteors = [];
+    let lastMeteor = 0;
+    const METEOR_INTERVAL = 1400; // ms between bursts
+
+    /* â”€â”€ Resize â”€â”€ */
+    function resize(){
+      dpr = window.devicePixelRatio || 1;
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width  = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width  = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      buildOffBg();
+    }
+
+    /* â”€â”€ Build static bg star field once onto offscreen canvas â”€â”€ */
+    function buildOffBg(){
+      offBg = document.createElement('canvas');
+      offBg.width = W * dpr; offBg.height = H * dpr;
+      const oc = offBg.getContext('2d');
+      oc.setTransform(dpr,0,0,dpr,0,0);
+
+      const count = Math.floor((W * H) / 700); // density scales with screen area
+      for(let i = 0; i < count; i++){
+        const x = Math.random() * W;
+        const y = Math.random() * H;
+        const rv = Math.random();
+        const r  = rv < 0.6 ? 0.3 + Math.random()*0.4
+                 : rv < 0.88 ? 0.65 + Math.random()*0.5
+                 : 1.0 + Math.random()*0.9;
+        const a  = 0.35 + Math.random()*0.65;
+        const [cr,cg,cb] = PAL[Math.floor(Math.random()*PAL.length)];
+
+        /* colored glow halo */
+        if(r > 0.6){
+          const halo = oc.createRadialGradient(x,y,0,x,y,r*6);
+          halo.addColorStop(0, `rgba(${cr},${cg},${cb},${(a*0.55).toFixed(2)})`);
+          halo.addColorStop(0.4,`rgba(${cr},${cg},${cb},${(a*0.18).toFixed(2)})`);
+          halo.addColorStop(1, 'rgba(0,0,0,0)');
+          oc.beginPath(); oc.arc(x,y,r*6,0,Math.PI*2);
+          oc.fillStyle = halo; oc.fill();
+        }
+
+        /* white core */
+        oc.beginPath(); oc.arc(x,y,r,0,Math.PI*2);
+        oc.fillStyle = `rgba(255,255,255,${a.toFixed(2)})`; oc.fill();
+
+        /* sparkle cross on bigger dots */
+        if(r > 0.85){
+          const arm = r * 3.8;
+          const lg = oc.createLinearGradient(x-arm,y,x+arm,y);
+          lg.addColorStop(0,'rgba(255,255,255,0)');
+          lg.addColorStop(0.5,`rgba(255,255,255,${(a*0.75).toFixed(2)})`);
+          lg.addColorStop(1,'rgba(255,255,255,0)');
+          oc.beginPath(); oc.moveTo(x-arm,y); oc.lineTo(x+arm,y);
+          oc.strokeStyle=lg; oc.lineWidth=0.8; oc.stroke();
+          const lv = oc.createLinearGradient(x,y-arm,x,y+arm);
+          lv.addColorStop(0,'rgba(255,255,255,0)');
+          lv.addColorStop(0.5,`rgba(255,255,255,${(a*0.75).toFixed(2)})`);
+          lv.addColorStop(1,'rgba(255,255,255,0)');
+          oc.beginPath(); oc.moveTo(x,y-arm); oc.lineTo(x,y+arm);
+          oc.strokeStyle=lv; oc.lineWidth=0.8; oc.stroke();
+        }
+      }
+    }
+
+    /* â”€â”€ Animated bright star factory â”€â”€ */
+    function mkAStar(x,y){
+      const [cr,cg,cb] = PAL[Math.floor(Math.random()*PAL.length)];
+      const r = 0.8 + Math.random()*2.4;
+      return {
+        x: x ?? Math.random()*W,
+        y: y ?? Math.random()*H,
+        r, cr, cg, cb,
+        vx:(Math.random()-.5)*0.4,
+        vy:(Math.random()-.5)*0.4,
+        phase:Math.random()*Math.PI*2,
+        twinkleAmp:0.4+Math.random()*0.5,
+        baseA:0.7+Math.random()*0.3,
+        a:1,
+        bright: r > 2.0,
+      };
+    }
+
+    /* â”€â”€ Draw one animated star â”€â”€ */
+    function drawAStar(s){
+      const a = s.a;
+      const {x,y,r,cr,cg,cb} = s;
+
+      /* outer halo */
+      const hR = r * (s.bright ? 10 : 6);
+      const h1 = ctx.createRadialGradient(x,y,0,x,y,hR);
+      h1.addColorStop(0, `rgba(${cr},${cg},${cb},${(a*.5).toFixed(2)})`);
+      h1.addColorStop(.45,`rgba(${cr},${cg},${cb},${(a*.15).toFixed(2)})`);
+      h1.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.beginPath(); ctx.arc(x,y,hR,0,Math.PI*2);
+      ctx.fillStyle=h1; ctx.fill();
+
+      /* inner corona */
+      const cR = r * 2.5;
+      const h2 = ctx.createRadialGradient(x,y,0,x,y,cR);
+      h2.addColorStop(0,`rgba(255,255,255,${(a*.98).toFixed(2)})`);
+      h2.addColorStop(.4,`rgba(${cr},${cg},${cb},${(a*.8).toFixed(2)})`);
+      h2.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.beginPath(); ctx.arc(x,y,cR,0,Math.PI*2);
+      ctx.fillStyle=h2; ctx.fill();
+
+      /* solid core */
+      ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${a.toFixed(2)})`; ctx.fill();
+
+      /* 4-point sparkle */
+      const arm = r * (s.bright ? 7 : 4.2);
+      const sa = a * (s.bright ? 0.95 : 0.65);
+      const lw = s.bright ? 1.4 : 0.85;
+      for(const [x1,y1,x2,y2] of [[x-arm,y,x+arm,y],[x,y-arm,x,y+arm]]){
+        const lg = ctx.createLinearGradient(x1,y1,x2,y2);
+        lg.addColorStop(0,`rgba(${cr},${cg},${cb},0)`);
+        lg.addColorStop(.45,`rgba(255,255,255,${sa.toFixed(2)})`);
+        lg.addColorStop(.5,`rgba(255,255,255,${a.toFixed(2)})`);
+        lg.addColorStop(.55,`rgba(255,255,255,${sa.toFixed(2)})`);
+        lg.addColorStop(1,`rgba(${cr},${cg},${cb},0)`);
+        ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2);
+        ctx.strokeStyle=lg; ctx.lineWidth=lw; ctx.stroke();
+      }
+      /* diagonal arms for giants */
+      if(s.bright){
+        const da = arm * 0.55;
+        ctx.save(); ctx.translate(x,y); ctx.rotate(Math.PI/4);
+        const ld=ctx.createLinearGradient(-da,0,da,0);
+        ld.addColorStop(0,'rgba(255,255,255,0)');
+        ld.addColorStop(.5,`rgba(255,255,255,${(a*.55).toFixed(2)})`);
+        ld.addColorStop(1,'rgba(255,255,255,0)');
+        ctx.beginPath(); ctx.moveTo(-da,0); ctx.lineTo(da,0);
+        ctx.moveTo(0,-da); ctx.lineTo(0,da);
+        ctx.strokeStyle=ld; ctx.lineWidth=0.7; ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    /* â”€â”€ Constellation links (only between close animated stars) â”€â”€ */
+    const LINK_D = 130, LINK_D2 = LINK_D*LINK_D;
+    function drawLinks(){
+      for(let i=0;i<aStars.length;i++){
+        for(let j=i+1;j<aStars.length;j++){
+          const a=aStars[i], b=aStars[j];
+          const dx=a.x-b.x, dy=a.y-b.y, d2=dx*dx+dy*dy;
+          if(d2>LINK_D2) continue;
+          const t=1-Math.sqrt(d2)/LINK_D;
+          const la=t*t*0.5*((a.a+b.a)*0.5);
+          const lg=ctx.createLinearGradient(a.x,a.y,b.x,b.y);
+          lg.addColorStop(0,`rgba(${a.cr},${a.cg},${a.cb},${la.toFixed(2)})`);
+          lg.addColorStop(1,`rgba(${b.cr},${b.cg},${b.cb},${la.toFixed(2)})`);
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle=lg; ctx.lineWidth=t*1.2; ctx.stroke();
+        }
+      }
+    }
+
+    /* â”€â”€ Meteor factory â”€â”€ */
+    function spawnMeteor(){
+      const fromTop = Math.random()<0.65;
+      let sx,sy,ang;
+      if(fromTop){ sx=W*.05+Math.random()*W*.8; sy=0; ang=0.25+Math.random()*0.6; }
+      else        { sx=0; sy=Math.random()*H*.7; ang=-0.2+Math.random()*0.45; }
+      const spd = 20+Math.random()*22;
+      const [cr,cg,cb] = PAL[Math.floor(Math.random()*PAL.length)];
+      meteors.push({
+        x:sx, y:sy,
+        vx:Math.cos(ang)*spd, vy:Math.sin(ang)*spd,
+        cr,cg,cb,
+        alpha:1,
+        trail:[],
+        w:2.5+Math.random()*2.5,
+      });
+    }
+
+    /* â”€â”€ Draw one meteor â”€â”€ */
+    function drawMeteor(m){
+      const {cr,cg,cb} = m;
+      /* gradient trail segments */
+      for(let i=1;i<m.trail.length;i++){
+        const t0=m.trail[i-1], t1=m.trail[i];
+        const ta=m.alpha*(1-i/m.trail.length);
+        if(ta<0.01) continue;
+        const lg=ctx.createLinearGradient(t0.x,t0.y,t1.x,t1.y);
+        lg.addColorStop(0,`rgba(255,255,255,${ta.toFixed(2)})`);
+        lg.addColorStop(1,`rgba(${cr},${cg},${cb},${(ta*0.35).toFixed(2)})`);
+        ctx.beginPath(); ctx.moveTo(t0.x,t0.y); ctx.lineTo(t1.x,t1.y);
+        ctx.strokeStyle=lg;
+        ctx.lineWidth = m.w*(1-i/m.trail.length)*1.6;
+        ctx.lineCap='round'; ctx.stroke();
+      }
+      /* glowing head */
+      const headR = m.w*8;
+      const hg=ctx.createRadialGradient(m.x,m.y,0,m.x,m.y,headR);
+      hg.addColorStop(0,`rgba(255,255,255,${m.alpha.toFixed(2)})`);
+      hg.addColorStop(.25,`rgba(${cr},${cg},${cb},${(m.alpha*0.9).toFixed(2)})`);
+      hg.addColorStop(.7,`rgba(${cr},${cg},${cb},${(m.alpha*0.3).toFixed(2)})`);
+      hg.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.beginPath(); ctx.arc(m.x,m.y,headR,0,Math.PI*2);
+      ctx.fillStyle=hg; ctx.fill();
+      /* bright white tip */
+      ctx.beginPath(); ctx.arc(m.x,m.y,m.w*1.3,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${m.alpha.toFixed(2)})`; ctx.fill();
+    }
+
+    /* â”€â”€ Mouse â”€â”€ */
+    let mouse={x:-9999,y:-9999};
+    document.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+    document.addEventListener('mouseleave',()=>{mouse.x=-9999;mouse.y=-9999;});
+
+    /* â”€â”€ Click burst â”€â”€ */
+    document.addEventListener('click',e=>{
+      for(let i=0;i<12;i++){
+        const s=mkAStar(e.clientX+(Math.random()-.5)*20,e.clientY+(Math.random()-.5)*20);
+        const ang=(i/12)*Math.PI*2;
+        s.vx=Math.cos(ang)*(2.5+Math.random()*3.5);
+        s.vy=Math.sin(ang)*(2.5+Math.random()*3.5);
+        s.bright=true; aStars.push(s);
+        if(aStars.length>ANIM_N+120) aStars.splice(0,12);
+      }
+    });
+
+    /* â”€â”€ Main loop â”€â”€ */
+    function draw(ts){
+      ctx.clearRect(0,0,W,H);
+
+      /* blit static star field */
+      if(offBg) ctx.drawImage(offBg,0,0,W,H);
+
+      /* spawn meteors */
+      if(ts - lastMeteor > METEOR_INTERVAL){
+        lastMeteor = ts;
+        spawnMeteor();
+        if(Math.random()<.5) setTimeout(spawnMeteor,450);
+        if(Math.random()<.2) setTimeout(spawnMeteor,950);
+      }
+
+      /* update + draw meteors */
+      meteors = meteors.filter(m=>m.alpha>.01 && m.x<W+100 && m.y<H+100);
+      for(const m of meteors){
+        m.trail.unshift({x:m.x,y:m.y});
+        if(m.trail.length>42) m.trail.pop();
+        m.x+=m.vx; m.y+=m.vy; m.alpha-=0.013;
+        drawMeteor(m);
+      }
+
+      /* constellation links */
+      drawLinks();
+
+      /* animated stars */
+      const MR2 = 180*180;
+      for(const s of aStars){
+        s.phase += 0.028+(s.bright?0.01:0);
+        s.a = s.baseA*(1-s.twinkleAmp+s.twinkleAmp*Math.abs(Math.sin(s.phase)));
+
+        /* mouse attract */
+        const dx=mouse.x-s.x,dy=mouse.y-s.y,d2=dx*dx+dy*dy;
+        if(d2<MR2&&d2>1){
+          const d=Math.sqrt(d2),f=(180-d)/180*0.025;
+          s.vx+=dx/d*f; s.vy+=dy/d*f;
+        }
+        const sp=Math.sqrt(s.vx*s.vx+s.vy*s.vy);
+        if(sp>1.2){s.vx*=.92;s.vy*=.92;}
+        s.vx*=.9995; s.vy*=.9995;
+        s.x+=s.vx; s.y+=s.vy;
+        if(s.x<-20)s.x=W+20; else if(s.x>W+20)s.x=-20;
+        if(s.y<-20)s.y=H+20; else if(s.y>H+20)s.y=-20;
+        drawAStar(s);
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    /* â”€â”€ Init â”€â”€ */
+    function init(){
+      resize();
+      aStars = Array.from({length:ANIM_N},()=>mkAStar());
+    }
+
+    window.addEventListener('resize',resize);
+    init();
+    requestAnimationFrame(draw);
+  })();
+  </script>
+</body>
+</html>

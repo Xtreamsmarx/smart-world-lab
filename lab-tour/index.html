@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lab Tour — Smart World Lab | UND</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="lab-tour.css" />
+</head>
+<body>
+
+  <!-- ── TOP BAR ── -->
+  <header class="lt-header">
+    <a class="lt-back" href="../index.html"><i class="fa-solid fa-arrow-left"></i> Smart World Lab</a>
+    <div class="lt-header-center">
+      <span class="lt-tag"><i class="fa-solid fa-flask"></i> Interactive Lab Tour</span>
+      <h1 class="lt-title">Smart World Lab — Floor Plan</h1>
+    </div>
+    <div class="lt-header-right">
+      <button class="lt-btn" id="btnResetView"><i class="fa-solid fa-arrows-to-circle"></i> Reset View</button>
+      <button class="lt-btn lt-btn--active" id="btnTogglePins"><i class="fa-solid fa-location-dot"></i> Hotspots</button>
+      <button class="lt-btn lt-btn--active" id="btnAutoTour"><i class="fa-solid fa-circle-play"></i> Auto Tour</button>
+    </div>
+  </header>
+
+  <!-- ── MAIN LAYOUT ── -->
+  <main class="lt-main">
+
+    <!-- SIDEBAR LEGEND -->
+    <aside class="lt-sidebar" id="sidebar">
+      <div class="lt-sidebar-title">Area Legend</div>
+      <ul class="lt-legend-list" id="legendList">
+        <!-- populated by JS -->
+      </ul>
+      <div class="lt-sidebar-footer">
+        <i class="fa-solid fa-circle-info"></i> Click any zone to explore
+      </div>
+    </aside>
+
+    <!-- FLOOR PLAN CANVAS -->
+    <div class="lt-map-wrap" id="mapWrap">
+      <div class="lt-map-inner" id="mapInner">
+
+        <!-- FLOOR PLAN IMAGE — save the attached image as assets/lab-floorplan.jpg -->
+        <img
+          class="lt-floorplan"
+          id="floorplanImg"
+          src="assets/Smart World Lab.png"
+          alt="Smart World Lab floor plan"
+          draggable="false"
+        />
+
+        <!-- HOTSPOT PINS — positioned as % of image dimensions -->
+        <div class="lt-pins" id="pinsLayer">
+          <!-- pins injected by JS -->
+        </div>
+
+      </div>
+
+      <!-- PAN / ZOOM HINT -->
+      <div class="lt-hint" id="mapHint">
+        <i class="fa-solid fa-hand-pointer"></i> Drag to pan &nbsp;·&nbsp;
+        <i class="fa-solid fa-magnifying-glass-plus"></i> Scroll to zoom &nbsp;·&nbsp;
+        <i class="fa-solid fa-location-dot"></i> Click pin to explore
+      </div>
+
+      <!-- ZOOM BUTTONS -->
+      <div class="lt-zoom-btns">
+        <button class="lt-zoom-btn" id="zoomIn" title="Zoom In"><i class="fa-solid fa-plus"></i></button>
+        <button class="lt-zoom-btn" id="zoomOut" title="Zoom Out"><i class="fa-solid fa-minus"></i></button>
+      </div>
+
+      <!-- PROCESS MENU (under image style) -->
+      <div class="lt-process" id="processMenu">
+        <div class="lt-process-head">
+          <strong>Full Fabrication Line: From Sense to Deploy &amp; Monitor</strong>
+          <span id="processStatus">Auto touring areas...</span>
+        </div>
+        <div class="lt-process-steps" id="processSteps"></div>
+        <div class="lt-feedback-loop">
+          <span class="lt-feedback-label">Feedback Loop: Continuous Improvement</span>
+          <span class="lt-feedback-track"><span class="lt-feedback-pulse"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DETAIL PANEL -->
+    <div class="lt-detail" id="detailPanel">
+      <button class="lt-detail-close" id="detailClose"><i class="fa-solid fa-xmark"></i></button>
+      <div class="lt-detail-icon" id="dIcon"></div>
+      <div class="lt-detail-zone" id="dZone"></div>
+      <h2 class="lt-detail-title" id="dTitle"></h2>
+      <p class="lt-detail-desc" id="dDesc"></p>
+      <div class="lt-detail-tags" id="dTags"></div>
+      <div class="lt-detail-specs" id="dSpecs"></div>
+      <div class="lt-detail-nav">
+        <button class="lt-nav-btn" id="dPrev"><i class="fa-solid fa-chevron-left"></i> Prev</button>
+        <span class="lt-nav-count" id="dCount"></span>
+        <button class="lt-nav-btn" id="dNext">Next <i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ZONE PULSE OVERLAY (full-screen highlight flash) -->
+  <div class="lt-zone-flash" id="zoneFlash"></div>
+
+  <script src="lab-tour.js"></script>
+</body>
+</html>
