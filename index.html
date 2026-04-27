@@ -1290,53 +1290,195 @@
 
   <!-- ===== AI ICEBERG ===== -->
   <section class="section ai-iceberg" id="ai-iceberg">
-    <div class="container">
-      <div class="section-tag">AI System Reality</div>
-      <h2 class="section-title grad">AI Iceberg: Inference on Top, Infrastructure Below</h2>
-      <p class="section-sub">What people see is fast AI inference. What enables it is a deeper stack under the surface: data, training, tuning, compute, and deployment operations.</p>
+    <div class="aib-wrap">
 
-      <div class="iceberg-stage reveal" id="icebergStage">
-        <div class="iceberg-sky-glow"></div>
-
-        <div class="iceberg-waterline">
-          <span>Waterline</span>
+      <!-- Header -->
+      <div class="aib-header">
+        <div class="aib-h-left">
+          <div class="aib-h-tag">AI ICEBERG</div>
+          <h2 class="aib-h-title">FROM AIR (INTELLIGENCE) TO<br>DEPLOY &amp; MONITOR (REALITY)</h2>
         </div>
-
-        <div class="iceberg-tip" data-ice-step="inference">
-          <div class="ice-label ice-label--top">Visible Outcome</div>
-          <div class="ice-core">
-            <i class="fa-solid fa-bolt"></i>
-            <h3>AI Inference</h3>
-            <p>Real-time predictions, responses, and decisions.</p>
-          </div>
+        <div class="aib-h-right">
+          <div class="aib-h-brand">SMART WORLD LAB</div>
+          <div class="aib-h-univ">UNIVERSITY OF NORTH DAKOTA</div>
         </div>
-
-        <div class="iceberg-body">
-          <article class="ice-layer" data-ice-step="data" style="--ic:#06b6d4">
-            <div class="ice-layer-head"><i class="fa-solid fa-database"></i><strong>Data Foundation</strong></div>
-            <p>Collection, labeling, quality control, lineage, and governance.</p>
-          </article>
-          <article class="ice-layer" data-ice-step="training" style="--ic:#6366f1">
-            <div class="ice-layer-head"><i class="fa-solid fa-dumbbell"></i><strong>Model Training</strong></div>
-            <p>Large-scale optimization loops with curated datasets and validation.</p>
-          </article>
-          <article class="ice-layer" data-ice-step="tuning" style="--ic:#8b5cf6">
-            <div class="ice-layer-head"><i class="fa-solid fa-sliders"></i><strong>Fine-Tuning</strong></div>
-            <p>Domain adaptation, alignment, prompt tuning, and performance shaping.</p>
-          </article>
-          <article class="ice-layer" data-ice-step="compute" style="--ic:#10b981">
-            <div class="ice-layer-head"><i class="fa-solid fa-microchip"></i><strong>Compute Stack</strong></div>
-            <p>GPU clusters, memory bandwidth, orchestration, and acceleration.</p>
-          </article>
-          <article class="ice-layer" data-ice-step="deploy" style="--ic:#f59e0b">
-            <div class="ice-layer-head"><i class="fa-solid fa-rocket"></i><strong>Deployment &amp; Ops</strong></div>
-            <p>Serving, monitoring, drift detection, rollback, and safety controls.</p>
-          </article>
-        </div>
-
-        <div class="iceberg-current"></div>
       </div>
-    </div>
+
+      <!-- 3-col grid -->
+      <div class="aib-grid">
+
+        <!-- LEFT: Layer descriptions -->
+        <div class="aib-left">
+
+          <div class="aib-layer" style="--lc:#60a5fa">
+            <div class="aib-layer-head">
+              <span class="aib-layer-name">AIR LAYER</span>
+              <span class="aib-layer-sub">VISIBLE INTELLIGENCE</span>
+            </div>
+            <div class="aib-layer-tools">
+              <div class="aib-tool"><i class="fa-brands fa-openai"></i><div><strong>ChatGPT</strong><ul><li>Conversational AI</li><li>Reasoning</li><li>Knowledge</li><li>Creativity</li></ul></div></div>
+              <div class="aib-tool"><i class="fa-solid fa-a"></i><div><strong>Claude</strong><ul><li>Analysis</li><li>Long-context</li><li>Writing</li><li>Insight</li></ul></div></div>
+              <div class="aib-tool"><i class="fa-solid fa-terminal"></i><div><strong>Prompt Engineering</strong><ul><li>Prompt Design</li><li>Context Structuring</li><li>Optimization</li><li>Iteration</li></ul></div></div>
+            </div>
+          </div>
+
+          <div class="aib-waterline-label">─── WATERLINE ───</div>
+
+          <div class="aib-layer" style="--lc:#06b6d4">
+            <div class="aib-layer-head">
+              <span class="aib-layer-name">WATERLINE LAYER</span>
+              <span class="aib-layer-sub">INTERFACE &amp; ORCHESTRATION</span>
+            </div>
+            <ul class="aib-bullets"><li>User Interfaces</li><li>API Gateways</li><li>Orchestration</li><li>Workflows</li><li>Safety &amp; Guardrails</li></ul>
+          </div>
+
+          <div class="aib-layer" style="--lc:#6366f1">
+            <div class="aib-layer-head">
+              <span class="aib-layer-name">FOUNDATION LAYER</span>
+              <span class="aib-layer-sub">MODELS &amp; KNOWLEDGE</span>
+            </div>
+            <ul class="aib-bullets"><li>Foundation Models (LLMs)</li><li>Fine-tuned Models</li><li>Embeddings &amp; Vector DB</li><li>Knowledge Graphs</li><li>RAG Pipelines</li></ul>
+          </div>
+
+          <div class="aib-layer" style="--lc:#10b981">
+            <div class="aib-layer-head">
+              <span class="aib-layer-name">INFRASTRUCTURE LAYER</span>
+              <span class="aib-layer-sub">COMPUTE &amp; DATA</span>
+            </div>
+            <ul class="aib-bullets"><li>GPU/TPU Compute</li><li>Cloud / On-Prem</li><li>Data Storage</li><li>Databases</li><li>Data Lakes</li></ul>
+          </div>
+
+          <div class="aib-layer" style="--lc:#f59e0b">
+            <div class="aib-layer-head">
+              <span class="aib-layer-name">FABRICATION LAYER</span>
+              <span class="aib-layer-sub">BUILD &amp; TEST</span>
+            </div>
+            <ul class="aib-bullets"><li>Data Processing</li><li>Model Training</li><li>Simulation</li><li>Testing &amp; Validation</li><li>CI/CD Pipelines</li></ul>
+          </div>
+
+          <div class="aib-layer" style="--lc:#ec4899">
+            <div class="aib-layer-head">
+              <span class="aib-layer-name">DEPLOYMENT LAYER</span>
+              <span class="aib-layer-sub">REAL WORLD IMPACT</span>
+            </div>
+            <ul class="aib-bullets"><li>API Deployment</li><li>Edge Deployment</li><li>Applications</li><li>Integration</li><li>User Adoption</li></ul>
+          </div>
+
+          <div class="aib-layer" style="--lc:#8b5cf6">
+            <div class="aib-layer-head">
+              <span class="aib-layer-name">MONITORING LAYER</span>
+              <span class="aib-layer-sub">OBSERVE &amp; IMPROVE</span>
+            </div>
+            <ul class="aib-bullets"><li>Monitoring</li><li>Logging</li><li>Analytics</li><li>Alerts</li><li>Continuous Improvement</li></ul>
+          </div>
+
+        </div><!-- /aib-left -->
+
+        <!-- CENTER: Iceberg visual -->
+        <div class="aib-center">
+          <div class="aib-cloud">
+            <i class="fa-solid fa-cloud"></i>
+            <span class="aib-cloud-label">AI</span>
+            <div class="aib-cloud-dots"><span></span><span></span><span></span></div>
+          </div>
+          <div class="aib-berg">
+            <div class="aib-berg-above"></div>
+            <div class="aib-berg-water-line"><span>Waterline</span></div>
+            <div class="aib-berg-below">
+              <div class="aib-berg-seg" style="--lc:#06b6d4; --w:88%"></div>
+              <div class="aib-berg-seg" style="--lc:#6366f1; --w:76%"></div>
+              <div class="aib-berg-seg" style="--lc:#10b981; --w:62%"></div>
+              <div class="aib-berg-seg" style="--lc:#f59e0b; --w:48%"></div>
+              <div class="aib-berg-seg" style="--lc:#ec4899; --w:34%"></div>
+              <div class="aib-berg-seg" style="--lc:#8b5cf6; --w:20%"></div>
+            </div>
+          </div>
+          <div class="aib-connect-dots">
+            <span style="--p:9%"></span>
+            <span style="--p:24%"></span>
+            <span style="--p:38%"></span>
+            <span style="--p:52%"></span>
+            <span style="--p:66%"></span>
+            <span style="--p:80%"></span>
+            <span style="--p:94%"></span>
+          </div>
+        </div><!-- /aib-center -->
+
+        <!-- RIGHT: Lab space cards -->
+        <div class="aib-right">
+
+          <div class="aib-lab-card" style="--lc:#60a5fa">
+            <div class="aib-lab-img aib-lab-air"><i class="fa-solid fa-cloud-bolt"></i></div>
+            <div class="aib-lab-info">
+              <div class="aib-lab-tag">AIR LAYER</div>
+              <div class="aib-lab-name">AI THINKING SPACE</div>
+              <div class="aib-lab-desc">ChatGPT · Claude · Prompt Engineering</div>
+            </div>
+          </div>
+
+          <div class="aib-lab-card" style="--lc:#06b6d4">
+            <div class="aib-lab-img aib-lab-control"><i class="fa-solid fa-display"></i></div>
+            <div class="aib-lab-info">
+              <div class="aib-lab-tag">INTERFACE &amp; ORCHESTRATION</div>
+              <div class="aib-lab-name">CONTROL CENTER</div>
+              <div class="aib-lab-desc">Multi-screen ops · API routing</div>
+            </div>
+          </div>
+
+          <div class="aib-lab-card" style="--lc:#6366f1">
+            <div class="aib-lab-img aib-lab-models"><i class="fa-solid fa-brain"></i></div>
+            <div class="aib-lab-info">
+              <div class="aib-lab-tag">MODELS &amp; KNOWLEDGE</div>
+              <div class="aib-lab-name">AI CORE LAB</div>
+              <div class="aib-lab-desc">LLMs · RAG · Vector databases</div>
+            </div>
+          </div>
+
+          <div class="aib-lab-card" style="--lc:#10b981">
+            <div class="aib-lab-img aib-lab-infra"><i class="fa-solid fa-server"></i></div>
+            <div class="aib-lab-info">
+              <div class="aib-lab-tag">INFRASTRUCTURE</div>
+              <div class="aib-lab-name">DATA CENTER</div>
+              <div class="aib-lab-desc">GPU clusters · Cloud · Storage</div>
+            </div>
+          </div>
+
+          <div class="aib-lab-card" style="--lc:#f59e0b">
+            <div class="aib-lab-img aib-lab-fab"><i class="fa-solid fa-robot"></i></div>
+            <div class="aib-lab-info">
+              <div class="aib-lab-tag">BUILD &amp; TEST</div>
+              <div class="aib-lab-name">FABRICATION LAB</div>
+              <div class="aib-lab-desc">Training runs · CI/CD · Simulation</div>
+            </div>
+          </div>
+
+          <div class="aib-lab-card" style="--lc:#ec4899">
+            <div class="aib-lab-img aib-lab-deploy"><i class="fa-solid fa-rocket"></i></div>
+            <div class="aib-lab-info">
+              <div class="aib-lab-tag">DEPLOYMENT</div>
+              <div class="aib-lab-name">REAL WORLD LAB</div>
+              <div class="aib-lab-desc">Edge · APIs · Live applications</div>
+            </div>
+          </div>
+
+          <div class="aib-lab-card" style="--lc:#8b5cf6">
+            <div class="aib-lab-img aib-lab-monitor"><i class="fa-solid fa-chart-line"></i></div>
+            <div class="aib-lab-info">
+              <div class="aib-lab-tag">MONITOR &amp; IMPROVE</div>
+              <div class="aib-lab-name">OPERATIONS CENTER</div>
+              <div class="aib-lab-desc">Dashboards · Alerts · Logging</div>
+            </div>
+          </div>
+
+        </div><!-- /aib-right -->
+
+      </div><!-- /aib-grid -->
+
+      <div class="aib-footer">
+        THE AI JOURNEY: FROM INTELLIGENCE IN THE AIR TO IMPACT IN THE REAL WORLD
+      </div>
+
+    </div><!-- /aib-wrap -->
   </section>
 
   <!-- ===== PROJECTS HUB ===== -->
