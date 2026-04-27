@@ -82,6 +82,144 @@
     });
   }
 
+  /* ── Optional Audio Tour (default: OFF) ── */
+  const navAudioTourBtn = document.getElementById('navAudioTourBtn');
+  const hasSpeech = 'speechSynthesis' in window;
+  let audioTourEnabled = false;
+  let audioTourTimer = null;
+  let audioTourStep = 0;
+
+  const audioTourStops = [
+    { id: 'home', text: 'Welcome to Smart World Lab at the University of North Dakota. This quick tour introduces the main sections of the site.' },
+    { id: 'about', text: 'This section explains the lab mission and interdisciplinary focus across cyber physical systems, AI, and digital infrastructure.' },
+    { id: 'mission-vision', text: 'Here you can review mission goals, vision, and long term direction for research and education impact.' },
+    { id: 'projects-hub', text: 'Projects Hub presents active initiatives and applied research tracks across multiple engineering domains.' },
+    { id: 'smart-city-3d', text: 'Digital Twin section: this interactive smart city model demonstrates virtual simulation, real world system mapping, and AI guided scenario analysis.' },
+    { id: 'research', text: 'Research areas include AI engineering, robotics, digital twin systems, and data driven smart infrastructure.' },
+    { id: 'equipment', text: 'Equipment and infrastructure provide hands on capability for prototyping, sensing, simulation, and deployment.' },
+    { id: 'centers', text: 'The centers section summarizes specialized labs including AIT, CPS, Digital Twin, and Robotics.' },
+    { id: 'team', text: 'Meet faculty and researchers collaborating across disciplines to build real world intelligent systems.' },
+    { id: 'contact', text: 'Contact section includes ways to collaborate, connect with the lab, and join future research activities.' }
+  ];
+
+  function clearAudioTourTimer() {
+    if (audioTourTimer) {
+      clearTimeout(audioTourTimer);
+      audioTourTimer = null;
+    }
+  }
+
+  function setAudioTourButtonState() {
+    if (!navAudioTourBtn) return;
+    const icon = navAudioTourBtn.querySelector('i');
+    const text = navAudioTourBtn.querySelector('span');
+
+    navAudioTourBtn.classList.toggle('is-on', audioTourEnabled);
+    navAudioTourBtn.setAttribute('aria-pressed', audioTourEnabled ? 'true' : 'false');
+    navAudioTourBtn.setAttribute('aria-label', audioTourEnabled ? 'Disable audio tour' : 'Enable audio tour');
+
+    if (icon) icon.className = audioTourEnabled ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+    if (text) text.textContent = audioTourEnabled ? 'Audio Tour On (DT)' : 'Audio Tour Off';
+  }
+
+  function stopAudioTour() {
+    audioTourEnabled = false;
+    audioTourStep = 0;
+    clearAudioTourTimer();
+    if (hasSpeech) window.speechSynthesis.cancel();
+    setAudioTourButtonState();
+  }
+
+  function speakTourText(text, onDone) {
+    if (!hasSpeech) {
+      onDone();
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.97;
+    utterance.pitch = 1;
+    utterance.volume = 1;
+    utterance.onend = onDone;
+    utterance.onerror = onDone;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function runAudioTourStep(index) {
+    if (!audioTourEnabled) return;
+    if (index >= audioTourStops.length) {
+      stopAudioTour();
+      return;
+    }
+
+    audioTourStep = index;
+    const stop = audioTourStops[index];
+    const target = document.getElementById(stop.id);
+
+    if (target) {
+      const top = target.getBoundingClientRect().top + window.scrollY - (navbar ? navbar.offsetHeight + 16 : 16);
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+
+    speakTourText(stop.text, () => {
+      if (!audioTourEnabled) return;
+      clearAudioTourTimer();
+      audioTourTimer = setTimeout(() => runAudioTourStep(index + 1), 900);
+    });
+  }
+
+  function startAudioTour() {
+    audioTourEnabled = true;
+    audioTourStep = 0;
+    setAudioTourButtonState();
+    runAudioTourStep(0);
+  }
+
+  if (navAudioTourBtn) {
+    navAudioTourBtn.addEventListener('click', () => {
+      if (audioTourEnabled) stopAudioTour();
+      else startAudioTour();
+    });
+    setAudioTourButtonState();
+  }
+
+  /* ── Presentation PDF overlay ── */
+  const navPresBtn = document.getElementById('navPresBtn');
+  const heroPresentationBtn = document.getElementById('heroPresentationBtn');
+  const presOverlay = document.getElementById('presOverlay');
+  const presClose = document.getElementById('presClose');
+  const presFrame = document.getElementById('presFrame');
+
+  function openPresentation() {
+    if (!presOverlay) return;
+    presOverlay.classList.add('open');
+    presOverlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('pres-open');
+
+    // Reset frame src to force browser PDF refresh when reopening.
+    if (presFrame && presFrame.dataset.srcInit !== '1') {
+      presFrame.dataset.srcInit = '1';
+      presFrame.src = presFrame.getAttribute('src');
+    }
+  }
+
+  function closePresentation() {
+    if (!presOverlay) return;
+    presOverlay.classList.remove('open');
+    presOverlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('pres-open');
+  }
+
+  if (navPresBtn) navPresBtn.addEventListener('click', openPresentation);
+  if (heroPresentationBtn) heroPresentationBtn.addEventListener('click', openPresentation);
+  if (presClose) presClose.addEventListener('click', closePresentation);
+  if (presOverlay) {
+    presOverlay.addEventListener('click', (e) => {
+      if (e.target === presOverlay) closePresentation();
+    });
+  }
+
   /* ── Navbar scroll behaviour ── */
   const navbar = document.getElementById('navbar');
   const backToTop = document.getElementById('backToTop');
@@ -125,7 +263,14 @@
   smClose.addEventListener('click', closeSmartMenu);
   smartMenu.addEventListener('click', e => { if (e.target === smartMenu) closeSmartMenu(); });
   smartMenu.querySelectorAll('.sm-item').forEach(a => a.addEventListener('click', closeSmartMenu));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeSmartMenu(); closeAiChat(); } });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeSmartMenu();
+      closeAiChat();
+      closePresentation();
+      stopAudioTour();
+    }
+  });
 
   /* ── Active section highlight ── */
   function highlightNav() { /* smart menu mode — no persistent nav links */ }

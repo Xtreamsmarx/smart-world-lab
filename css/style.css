@@ -280,6 +280,36 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 0 22px rgba(99,102,241,0.35);
 }
 
+.nav-ctrl-btn--pres {
+  background: rgba(14,116,144,0.2);
+  border-color: rgba(125,211,252,0.45);
+  color: #e0f2fe;
+}
+
+.nav-ctrl-btn--pres:hover {
+  background: rgba(14,116,144,0.35);
+  border-color: rgba(125,211,252,0.7);
+  box-shadow: 0 0 22px rgba(56,189,248,0.35);
+}
+
+.nav-ctrl-btn--tour {
+  background: rgba(148,163,184,0.12);
+  border-color: rgba(148,163,184,0.38);
+  color: #cbd5e1;
+}
+
+.nav-ctrl-btn--tour:hover {
+  background: rgba(148,163,184,0.24);
+  border-color: rgba(148,163,184,0.65);
+}
+
+.nav-ctrl-btn--tour.is-on {
+  background: rgba(16,185,129,0.2);
+  border-color: rgba(52,211,153,0.68);
+  color: #d1fae5;
+  box-shadow: 0 0 20px rgba(16,185,129,0.28);
+}
+
 .btn-os {
   background: linear-gradient(135deg, #0e7490 0%, #0891b2 60%, #0e4f7a 100%);
   color: #fff;
@@ -301,6 +331,19 @@ img { max-width: 100%; display: block; }
 }
 .btn-os:hover::after { opacity: 1; }
 .btn-os:hover { transform: translateY(-3px); box-shadow: 0 12px 45px rgba(6,182,212,0.65); }
+
+.btn-pres {
+  background: linear-gradient(135deg, rgba(14,116,144,0.25), rgba(99,102,241,0.25));
+  color: #dbeafe;
+  border: 1px solid rgba(125,211,252,0.45);
+}
+
+.btn-pres:hover {
+  transform: translateY(-2px);
+  border-color: rgba(125,211,252,0.8);
+  box-shadow: 0 10px 28px rgba(56,189,248,0.3);
+}
+
 @keyframes osGlow {
   0%,100% { box-shadow: 0 4px 20px rgba(6,182,212,0.35); }
   50%      { box-shadow: 0 4px 40px rgba(6,182,212,0.65); }
@@ -5522,3 +5565,144 @@ img { max-width: 100%; display: block; }
 .splash-corner--br { bottom: 1.4rem; right: 1.6rem; }
 /* hide scrollbar while splash is showing */
 body.splash-active { overflow: hidden; }
+
+/* ===== PRESENTATION PDF OVERLAY ===== */
+body.pres-open {
+  overflow: hidden;
+}
+
+.pres-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(2,8,23,0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.pres-overlay.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.pres-shell {
+  width: min(1400px, 100%);
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: linear-gradient(160deg, rgba(15,23,42,0.96), rgba(2,8,23,0.98));
+  border: 1px solid rgba(148,163,184,0.25);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.55);
+}
+
+.pres-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(148,163,184,0.2);
+  background: rgba(15,23,42,0.75);
+}
+
+.pres-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #e2e8f0;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.pres-brand i {
+  color: #f87171;
+}
+
+.pres-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pres-action-link,
+.pres-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(148,163,184,0.35);
+  border-radius: 10px;
+  padding: 7px 10px;
+  background: rgba(30,41,59,0.65);
+  color: #e2e8f0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+}
+
+.pres-close {
+  padding: 7px 11px;
+}
+
+.pres-action-link:hover,
+.pres-close:hover {
+  background: rgba(51,65,85,0.95);
+  border-color: rgba(148,163,184,0.65);
+}
+
+.pres-body {
+  min-height: 0;
+  background: #0b1220;
+}
+
+.pres-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #0f172a;
+}
+
+.pres-footer {
+  padding: 8px 14px;
+  border-top: 1px solid rgba(148,163,184,0.2);
+  background: rgba(15,23,42,0.72);
+}
+
+.pres-footer p {
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+@media (max-width: 900px) {
+  .pres-overlay {
+    padding: 8px;
+  }
+
+  .pres-shell {
+    border-radius: 10px;
+  }
+
+  .pres-action-link span {
+    display: none;
+  }
+
+  .pres-header {
+    padding: 10px;
+  }
+
+  .pres-brand {
+    font-size: 0.86rem;
+  }
+}

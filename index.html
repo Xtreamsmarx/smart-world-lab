@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart World Lab University of North Dakota</title>
+  <title>Smart World Lab - University of North Dakota</title>
   <link rel="stylesheet" href="css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -54,6 +54,12 @@
       <div class="nav-controls">
         <button class="nav-ctrl-btn" id="navAiBtn" aria-label="Open AI Chat">
           <i class="fa-solid fa-robot"></i><span>AI Chat</span>
+        </button>
+        <button class="nav-ctrl-btn nav-ctrl-btn--tour" id="navAudioTourBtn" aria-label="Enable audio tour" aria-pressed="false">
+          <i class="fa-solid fa-volume-xmark"></i><span>Audio Tour Off</span>
+        </button>
+        <button class="nav-ctrl-btn nav-ctrl-btn--pres" id="navPresBtn" aria-label="Open Interactive Presentation">
+          <i class="fa-solid fa-chalkboard"></i><span>Presentation</span>
         </button>
         <button class="nav-ctrl-btn nav-ctrl-btn--menu" id="navMenuBtn" aria-label="Open Site Menu">
           <i class="fa-solid fa-bars"></i><span>Menu</span>
@@ -171,7 +177,10 @@
           in CPS, AI Engineering, Digital Twin Technologies, Smart Cities, Robotics, UAV Systems, and Digital Fabrication.
         </p>
         <div class="hero-actions">
-          <a href="#about" class="btn btn-primary">Learn More</a>
+          <a href="https://xtreamsmarx.github.io/SmartWorld/team/team.html" target="_blank" rel="noopener" class="btn btn-primary">Team</a>
+          <button type="button" class="btn btn-pres" id="heroPresentationBtn">
+            <i class="fa-solid fa-chalkboard"></i> View Presentation
+          </button>
           <a href="#equipment" class="btn btn-outline">View Equipment</a>
           <button type="button" class="btn btn-os" id="goToOsBtn">
             <i class="fa-solid fa-wand-magic-sparkles"></i> Go to Smart World OS
@@ -2734,6 +2743,39 @@
         <div class="os-ring-logo"><i class="fa-solid fa-globe"></i></div>
       </div>
       <p class="os-overlay-label">Launching Smart World OS&hellip;</p>
+    </div>
+  </div>
+
+  <!-- ===== PRESENTATION PDF OVERLAY ===== -->
+  <div class="pres-overlay" id="presOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Smart World Lab Presentation PDF">
+    <div class="pres-shell" role="document">
+      <div class="pres-header">
+        <div class="pres-brand">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span>Smart World Lab Presentation</span>
+        </div>
+        <div class="pres-actions">
+          <a id="presOpenNewTab" class="pres-action-link" href="content/Smart%20World.pdf" target="_blank" rel="noopener">
+            <i class="fa-solid fa-up-right-from-square"></i>
+            <span>Open in New Tab</span>
+          </a>
+          <button class="pres-close" id="presClose" aria-label="Close presentation">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+      <div class="pres-body">
+        <iframe
+          id="presFrame"
+          class="pres-frame"
+          src="content/Smart%20World.pdf#view=FitH"
+          title="Smart World Lab Presentation PDF"
+          loading="lazy"
+        ></iframe>
+      </div>
+      <div class="pres-footer">
+        <p>Current PDF: <strong>content/Smart World.pdf</strong></p>
+      </div>
     </div>
   </div>
 
