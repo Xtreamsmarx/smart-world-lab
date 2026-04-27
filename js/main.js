@@ -5,6 +5,66 @@
 (function () {
   'use strict';
 
+  /* ── SPLASH INTRO SCREEN ── */
+  (function initSplash() {
+    const splash = document.getElementById('splashScreen');
+    const enterBtn = document.getElementById('splashEnterBtn');
+    const fill = document.getElementById('splashProgressFill');
+    const canvas = document.getElementById('splashMatrix');
+    if (!splash) return;
+
+    document.body.classList.add('splash-active');
+
+    // Matrix rain on splash canvas
+    const ctx = canvas.getContext('2d');
+    function resizeSplash() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resizeSplash();
+    window.addEventListener('resize', resizeSplash);
+    const cols = Math.floor(canvas.width / 16);
+    const drops = Array(cols).fill(1);
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>[]{}';
+    function drawSplashMatrix() {
+      ctx.fillStyle = 'rgba(2,8,23,0.15)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.font = '14px monospace';
+      drops.forEach((y, i) => {
+        const ch = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillStyle = i % 7 === 0 ? '#ccffcc' : 'rgba(0,200,50,0.55)';
+        ctx.fillText(ch, i * 16, y * 16);
+        if (y * 16 > canvas.height && Math.random() > 0.97) drops[i] = 0;
+        drops[i]++;
+      });
+    }
+    let matrixTimer = setInterval(drawSplashMatrix, 55);
+
+    // Progress bar auto-fill over 2.8s then show button
+    let pct = 0;
+    const progressInterval = setInterval(() => {
+      pct = Math.min(pct + 1.4, 100);
+      if (fill) fill.style.width = pct + '%';
+      if (pct >= 100) clearInterval(progressInterval);
+    }, 40);
+
+    function closeSplash() {
+      clearInterval(matrixTimer);
+      splash.classList.add('splash-out');
+      document.body.classList.remove('splash-active');
+      setTimeout(() => { splash.style.display = 'none'; }, 750);
+    }
+
+    // Enter button
+    if (enterBtn) enterBtn.addEventListener('click', closeSplash);
+    // Also allow pressing Enter key or Space
+    document.addEventListener('keydown', function onKey(e) {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
+        document.removeEventListener('keydown', onKey);
+        closeSplash();
+      }
+    });
+    // Auto-dismiss after 8s
+    setTimeout(closeSplash, 8000);
+  })();
+
   /* ── OS Launch button ── */
   const goToOsBtn = document.getElementById('goToOsBtn');
   const osOverlay = document.getElementById('osOverlay');

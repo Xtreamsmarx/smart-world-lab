@@ -10,6 +10,38 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.min.js"></script>
 </head>
 <body>
+
+  <!-- ===== SPLASH INTRO ===== -->
+  <div class="splash-screen" id="splashScreen" aria-modal="true" role="dialog" aria-label="Smart World Lab intro">
+    <canvas class="splash-matrix" id="splashMatrix"></canvas>
+    <div class="splash-glow splash-glow--1"></div>
+    <div class="splash-glow splash-glow--2"></div>
+    <div class="splash-content">
+      <div class="splash-logo-ring">
+        <svg class="splash-ring-svg" viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(99,102,241,0.35)" stroke-width="1" stroke-dasharray="6 10"/>
+          <circle cx="100" cy="100" r="72" fill="none" stroke="rgba(6,182,212,0.25)" stroke-width="1" stroke-dasharray="4 14"/>
+        </svg>
+        <div class="splash-globe-icon"><i class="fa-solid fa-globe"></i></div>
+      </div>
+      <div class="splash-und">UNIVERSITY OF NORTH DAKOTA</div>
+      <h1 class="splash-title">
+        <span class="splash-word splash-word--smart">Smart</span>
+        <span class="splash-word splash-word--world">World</span>
+        <br>
+        <span class="splash-word splash-word--lab">Center</span>
+      </h1>
+      <p class="splash-tagline">Intelligent Systems · Edge AI · Cyber-Physical Lab</p>
+      <div class="splash-progress-bar"><div class="splash-progress-fill" id="splashProgressFill"></div></div>
+      <button class="splash-enter-btn" id="splashEnterBtn" aria-label="Enter Smart World Lab website">
+        <span>Enter</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+    <div class="splash-corner splash-corner--tl">UND</div>
+    <div class="splash-corner splash-corner--br">SMART WORLD</div>
+  </div><!-- /splash-screen -->
+
   <canvas class="constellation-canvas" id="constellationCanvas"></canvas>
 
   <!-- ===== NAVBAR ===== -->
